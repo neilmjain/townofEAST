@@ -1,0 +1,2558 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Town Of Us: Reactivated Roles & Modifiers</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General resets and base styles */
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            background-image:url(FwRJ_KeacAExqhJ.jpg); /* Keep your background image here */
+            background-size: cover; /* Ensure it covers the whole area */
+            background-attachment: fixed; /* Keep background fixed when scrolling */
+            background-position: center; /* Center the background image */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif; /* Applied Inter for general text */
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 95%;
+            background-color: rgba(36, 36, 36, 0.8); /* Changed to rgba for opacity */
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 255, 0.1);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid rgba(0, 255, 255, 0.2);
+            padding-bottom: 10px;
+            gap: 20px;
+        }
+
+        .tab-button {
+            background-color: rgba(51, 51, 51, 0.8);
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid #444444;
+        }
+
+        .tab-button:hover {
+            background-color: rgba(70, 70, 70, 0.8);
+        }
+
+        .tab-button.active {
+            background-color: #00FFFF;
+            color: #222222;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            border-color: #00FFFF;
+        }
+
+        /* Content Sections */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Header section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 20px;
+            display: flex; /* Use flexbox for alignment */
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+            gap: 20px; /* Space between search bar and dropdown */
+        }
+
+        .header-section h1 {
+            font-family: 'Amatic SC', sans-serif; /* Applied Amatic SC for main title */
+            font-size: 3rem;
+            font-weight: 700; /* Adjusted font weight for Inter */
+            color: #00FFFF; /* Cyan */
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+            margin-bottom: 0; /* Adjusted margin */
+            letter-spacing: 1px;
+            display: block;
+            width: 40%;
+            min-width: 200px; /* Ensure logo doesn't get too small */
+        }
+      
+        /* Search bar */
+        .search-bar {
+            width: 100%;
+            max-width: 600px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border-radius: 8px;
+            background-color: rgba(51, 51, 51, 0.8); /* Changed to rgba for opacity */
+            border: 1px solid #444444;
+            color: #ffffff;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            font-family: 'Inter', sans-serif; /* Applied Inter */
+        }
+
+        .search-bar input::placeholder {
+            color: #bbbbbb;
+        }
+
+        .search-bar input:focus {
+            border-color: #00FFFF;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+        .search-bar svg {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #bbbbbb;
+        }
+
+        /* Combined Filter Dropdown */
+        .combined-filter-dropdown {
+            width: 100%;
+            max-width: 600px; /* Match search bar width */
+            margin-top: -10px; /* Adjust spacing if needed */
+        }
+
+        .combined-filter-dropdown select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: rgba(51, 51, 51, 0.8); /* Changed to rgba for opacity */
+            border: 1px solid #444444;
+            color: #ffffff;
+            font-size: 0.95rem;
+            outline: none;
+            cursor: pointer;
+            -webkit-appearance: none; /* Remove default arrow on Chrome/Safari */
+            -moz-appearance: none; /* Remove default arrow on Firefox */
+            appearance: none; /* Remove default arrow */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%20viewBox%3D%220%200%20292.4%20292.4%22%3E%3Cpath%20fill%3D%22%23ffffff%22%20d%3D%22M287%2C197.387L146.203%2C56.59%2C5.406%2C197.387H287Z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 12px auto;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .combined-filter-dropdown select:focus {
+            border-color: #00FFFF;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+        }
+
+
+        /* Role Grid */
+        .card-grid { /* Renamed from role-grid to be more general */
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 15px;
+            padding: 20px 0;
+        }
+
+        /* Base Card Styling */
+        .base-card {
+            background-color: rgba(42, 42, 42, 0.8); /* Changed to rgba for opacity */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 255, 255, 0.05);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            border: 1px solid; /* Will be set by JS */
+            cursor: pointer; /* Indicate clickable */
+        }
+
+        .base-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        /* Specific styles for Role Cards */
+        .role-card {
+            /* Inherits from .base-card */
+        }
+
+        /* Specific styles for Modifier Cards */
+        .modifier-card {
+            /* Inherits from .base-card */
+            padding: 15px; /* Slightly smaller padding */
+            gap: 10px; /* Slightly smaller gap */
+        }
+
+        .card-header { /* Renamed from role-header to be more general */
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        /* Icon Wrapper - for circular roles */
+        .role-icon-wrapper {
+            width: 70px; /* Increased size */
+            height: 70px; /* Increased size */
+            border-radius: 50%; /* Circular */
+            background-color: rgba(26, 26, 26, 0.8); /* Changed to rgba for opacity */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            /* Removed border: 2px solid; */
+            overflow: hidden;
+            position: relative;
+            /* Removed box-shadow */
+        }
+
+        /* Icon Wrapper - for square modifiers */
+        .modifier-icon-wrapper {
+            width: 60px; /* Smaller size for modifiers */
+            height: 60px; /* Smaller size for modifiers */
+            border-radius: 0; /* Square */
+            background-color: rgba(26, 26, 26, 0.8); /* Changed to rgba for opacity */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            /* Removed border: 2px solid; */
+            overflow: hidden;
+            position: relative;
+            /* Removed box-shadow */
+        }
+
+        /* Icon Image - for circular roles */
+        .role-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%; /* Circular */
+            position: relative;
+            z-index: 2;
+            transform: scale(1.7); /* Adjust this value to "zoom in" more or less */
+            /* Removed filter: drop-shadow */
+        }
+
+        /* Icon Image - for square modifiers */
+        .modifier-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 0; /* Square */
+            position: relative;
+            z-index: 2;
+            transform: scale(1.7); /* Slightly less zoom for modifiers */
+            /* Removed filter: drop-shadow */
+        }
+
+
+        .card-title-group { /* Renamed from role-title-group */
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .card-name { /* Renamed from role-name */
+            font-family: 'Amatic SC', sans-serif; /* Applied Amatic SC */
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .modifier-card .card-name { /* Smaller font size for modifier names */
+            font-size: 32px;
+        }
+
+        .card-team { /* Renamed from role-team */
+            font-family: 'Amatic SC', sans-serif; /* Applied Amatic SC */
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #bbbbbb;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .team-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            box-shadow: 0 0 5px rgba(0,0,0,0.5); /* Will be set by JS */
+        }
+
+        .card-description { /* Renamed from role-description */
+            font-family: 'Inter', sans-serif; /* Applied Inter */
+            font-size: 0.95rem;
+            line-height: 1.5;
+            color: #cccccc;
+        }
+
+        .card-abilities { /* Renamed from role-abilities */
+            background-color: rgba(26, 26, 26, 0.8); /* Changed to rgba for opacity */
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #333333;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            margin-top: auto; /* Pushes this section to the bottom */
+        }
+
+        .card-abilities h4 {
+            font-family: 'Inter', sans-serif; /* Applied Inter */
+            font-size: 1rem;
+            font-weight: 600;
+            color: #00FFFF;
+            margin-bottom: 10px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .ability-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 6px;
+            font-size: 0.9rem;
+            color: #e0e0e0;
+            font-family: 'Inter', sans-serif; /* Applied Inter */
+        }
+
+        .ability-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .ability-icon {
+            width: 24px;
+            height: 24px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.4));
+        }
+
+        .card-settings { /* Renamed from role-settings */
+            background-color: rgba(26, 26, 26, 0.8); /* Changed to rgba for opacity */
+            border-radius: 8px;
+            padding: 12px;
+            border: 1px solid #333333;
+            box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+            margin-top: 15px; /* Add some spacing if settings are present */
+        }
+
+        .card-settings h4 {
+            font-family: 'Inter', sans-serif; /* Applied Inter */
+            font-size: 1rem;
+            font-weight: 600;
+            color: #FFD700; /* Gold for settings */
+            margin-bottom: 10px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .setting-item {
+            font-family: 'Inter', sans-serif; /* Applied Inter */
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            margin-bottom: 4px;
+            line-height: 1.4;
+        }
+        .setting-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: rgba(36, 36, 36, 0.95);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(0, 255, 255, 0.1);
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-close-button {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: #ffffff;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+        }
+
+        .modal-close-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .modal-icon-wrapper {
+            width: 100px; /* Larger icon in modal */
+            height: 100px; /* Larger icon in modal */
+            border-radius: 50%; /* Default for roles */
+            background-color: rgba(26, 26, 26, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .modal-icon-wrapper.square {
+            border-radius: 0; /* Square for modifiers */
+        }
+
+        .modal-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%; /* Default for roles */
+            transform: scale(1.7); /* Zoom for roles */
+        }
+
+        .modal-icon.square {
+            border-radius: 0; /* Square for modifiers */
+            transform: scale(1.7); /* Zoom for modifiers */
+        }
+
+        .modal-title-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-name {
+            font-family: 'Amatic SC', sans-serif;
+            font-size: 3.5rem; /* Larger font for modal name */
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 5px;
+        }
+
+        .modal-team {
+            font-family: 'Amatic SC', sans-serif;
+            font-size: 1.8rem; /* Larger font for modal team */
+            font-weight: 500;
+            color: #bbbbbb;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .modal-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem; /* Larger font for modal description */
+            line-height: 1.6;
+            color: #cccccc;
+            margin-bottom: 20px;
+        }
+
+        .modal-section-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #00FFFF; /* Cyan for abilities */
+            text-align: center;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        .modal-section-title.settings {
+            color: #FFD700; /* Gold for settings */
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+
+        /* Enhanced Ability Section Styling */
+        .modal-abilities-section {
+            background-color: rgba(26, 26, 26, 0.8);
+            border-radius: 8px;
+            padding: 15px;
+            border: 1px solid #333333;
+            box-shadow: inset 0 0 8px rgba(0, 255, 255, 0.1); /* Subtle glow */
+            margin-bottom: 20px;
+        }
+
+        .modal-ability-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 15px; /* Added padding */
+            background-color: rgba(42, 42, 42, 0.7); /* Slightly lighter background */
+            border-radius: 6px;
+            border: 1px solid #444444;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s ease;
+        }
+
+        .modal-ability-item:hover {
+            background-color: rgba(55, 55, 55, 0.8);
+        }
+
+        .modal-ability-icon {
+            width: 32px; /* Larger ability icon */
+            height: 32px; /* Larger ability icon */
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px rgba(0, 255, 255, 0.6));
+        }
+
+        .modal-setting-item {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            color: #a0a0a0;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+        .modal-setting-item:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Custom Game Settings Tab Specific Styling */
+        #game-settings-tab {
+            max-height: calc(100vh - 180px); /* Adjust as needed for overall layout */
+            overflow-y: auto;
+            padding-right: 15px; /* For scrollbar */
+            padding-bottom: 20px; /* Padding at the bottom of the scroll area */
+        }
+
+        .settings-category {
+            background-color: transparent; /* No background for categories */
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+            padding: 0; /* Remove padding from category container */
+            margin-bottom: 25px; /* Space between categories */
+        }
+
+        .settings-category-title {
+            font-family: 'Amatic SC', sans-serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #FFD700; /* Gold */
+            margin-bottom: 15px; /* Space below title */
+            text-align: left; /* Align left for Among Us feel */
+            padding-left: 10px; /* Indent title slightly */
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+            text-transform: uppercase; /* Among Us titles are often uppercase */
+        }
+
+        .settings-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Keep 2 columns for wider screens */
+            gap: 10px 30px; /* More column gap */
+            padding: 0 10px; /* Add horizontal padding to the list */
+        }
+
+        .settings-list-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0; /* Less vertical padding */
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+
+        .settings-list-item:last-child {
+            border-bottom: none; /* No border on the last item in a category */
+        }
+
+
+        /* Responsive Modal */
+        @media (max-width: 768px) {
+            .modal-content {
+                padding: 20px;
+                width: 95%;
+                max-height: 95%;
+            }
+            .modal-close-button {
+                font-size: 1.5rem;
+                top: 10px;
+                right: 10px;
+            }
+            .modal-header {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            .modal-icon-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+            .modal-name {
+                font-size: 2.5rem;
+            }
+            .modal-team {
+                font-size: 1.3rem;
+            }
+            .modal-description {
+                font-size: 1rem;
+            }
+            .modal-section-title {
+                font-size: 1.1rem;
+            }
+            .modal-ability-item {
+                font-size: 0.9rem;
+                gap: 10px;
+            }
+            .modal-ability-icon {
+                width: 28px;
+                height: 28px;
+            }
+            .modal-setting-item {
+                font-size: 0.85rem;
+            }
+            .tab-button {
+                padding: 8px 15px;
+                font-size: 1rem;
+            }
+            #game-settings-tab {
+                padding: 15px 0;
+                gap: 20px;
+            }
+            .settings-category {
+                padding: 0;
+            }
+            .settings-category-title {
+                font-size: 1.8rem;
+                margin-bottom: 10px;
+            }
+            .settings-list {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .settings-list-item {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+        <div class="tab-nav">
+            <button class="tab-button active" data-tab="roles-modifiers">Roles & Modifiers</button>
+            <button class="tab-button" data-tab="game-settings">Custom Game Settings</button>
+        </div>
+
+        <div id="roles-modifiers-tab" class="tab-content active">
+            <div class="header-section">
+                <h1><img src="toulogo.png" alt="Town Of Us Reactivated Logo"></h1>
+                <div class="search-bar">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                        <path fill-rule="evenodd" d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z" clip-rule="evenodd" />
+                    </svg>
+                    <input type="text" id="search-input" placeholder="Search for a role or modifier...">
+                </div>
+
+                <div class="combined-filter-dropdown">
+                    <select id="combined-filter-select">
+                        <option value="All">All Categories & Types</option>
+                        <optgroup label="Roles">
+                            <option value="Crewmate">Crewmate Role</option>
+                            <option value="Neutral">Neutral Role</option>
+                            <option value="Impostor">Impostor Role</option>
+                        </optgroup>
+                        <optgroup label="Modifiers">
+                            <option value="Crewmate Modifier">Crewmate Modifier</option>
+                            <option value="Global Modifier">Global Modifier</option>
+                            <option value="Impostor Modifier">Impostor Modifier</option>
+                        </optgroup>
+                        <optgroup label="Types">
+                            <option value="Kill">Kill</option>
+                            <option value="Support">Support</option>
+                            <option value="Detection">Detection</option>
+                            <option value="Utility">Utility</option>
+                            <option value="Sabotage">Sabotage</option>
+                            <option value="Passive">Passive</option>
+                            <option value="Active">Active</option>
+                            <option value="Death Trigger">Death Trigger</option>
+                            <option value="Buff">Buff</option>
+                            <option value="Debuff">Debuff</option>
+                            <option value="Defense">Defense</option>
+                            <option value="Information">Information</option>
+                            <option value="Social">Social</option>
+                            <option value="Win Condition">Win Condition</option>
+                            <option value="Other">Other</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            <div id="card-grid" class="card-grid"></div>
+        </div>
+
+        <div id="game-settings-tab" class="tab-content">
+            <h2 class="text-3xl font-bold text-center text-yellow-400 mb-8">Global Game Settings</h2>
+            <div id="game-settings-container" class="game-settings-container">
+                </div>
+        </div>
+    </main>
+
+    <div id="detail-modal-overlay" class="modal-overlay">
+        <div id="detail-modal-content" class="modal-content">
+            <button id="modal-close-button" class="modal-close-button">&times;</button>
+            <div class="modal-header">
+                <div id="modal-icon-wrapper" class="modal-icon-wrapper">
+                    <img id="modal-icon" class="modal-icon" src="" alt="Entity Icon">
+                </div>
+                <div class="modal-title-group">
+                    <h2 id="modal-name" class="modal-name"></h2>
+                    <p id="modal-team" class="modal-team"></p>
+                </div>
+            </div>
+            <p id="modal-description" class="modal-description"></p>
+            
+            <div class="modal-abilities-section">
+                <h4 class="modal-section-title">Ability</h4>
+                <div id="modal-ability-item" class="modal-ability-item">
+                    <img id="modal-ability-icon" class="modal-ability-icon" src="" alt="Ability Icon">
+                    <span id="modal-ability-name"></span>
+                </div>
+            </div>
+
+            <div id="modal-settings-section" class="modal-settings-section" style="display: none;">
+                <h4 class="modal-section-title settings">Settings</h4>
+                <div id="modal-settings-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Define colors for team categories (used for the team dot)
+        const teamColors = {
+            "Crewmate": {
+                dotColor: '#00FFFF', // Cyan
+            },
+            "Impostor": {
+                dotColor: '#FF0000', // Red
+            },
+            "Neutral": {
+                dotColor: '#808080', // Gray
+            }
+        };
+
+        // Define unique colors for each individual role name, icon outline, and card outline
+        const roleColors = {
+            "Aurial": "#c88aab",
+            "Detective": "#5e8eb8",
+            "Haunter": "#cacac9",
+            "Investigator": "#8affff",
+            "Lookout": "#2be484",
+            "Mystic": "#73a2eb",
+            "Seer": "#f5d572",
+            "Snitch": "#b5803e",
+            "Spy": "#ce7eb0",
+            "Tracker": "#46ca00",
+            "Trapper": "#99998f",
+            "Deputy": "#d9ad00",
+            "Hunter": "#017d20",
+            "Jailor": "#9a9a9a",
+            "Sheriff": "#e7e247",
+            "Veteran": "#bb9b4f",
+            "Vigilante": "#fbf793",
+            "Altruist": "#790a0a",
+            "Cleric": "#12e2bb",
+            "Medic": "#008e31",
+            "Oracle": "#960096",
+            "Warden": "#4900b5",
+            "Engineer": "#e6a063",
+            "Imitator": "#a1b501",
+            "Mayor": "#8b67e8",
+            "Medium": "#8b67e8",
+            "Plumber": "#d3954a",
+            "Politician": "#7e2e97",
+            "Prosecutor": "#976c00",
+            "Swapper": "#05d338",
+            "Transporter": "#a4f9ff",
+
+            "Amnesiac": "#96e5ff",
+            "Guardian Angel": "#ADD8E6",
+            "Mercenary": "#8b67e8",
+            "Survivor": "#f5fb88",
+            "Doomsayer": "#00d66b",
+            "Executioner": "#3f1711",
+            "Jester": "#d58fc3",
+            "Phantom": "#ad4f8c",
+            "Soul Collector": "#12e2bb",
+            "Arsonist": "#f68920",
+            "Juggernaut": "#8c004d",
+            "Plaguebearer": "#3f474e",
+            "Pestilence": "#3f474e",
+            "Glitch": "#00FF00",
+            "Vampire": "#212121",
+            "Werewolf": "#8f4c18",
+
+            "Eclipsal": "#c41111",
+            "Escapist": "#c41111",
+            "Grenadier": "#c41111",
+            "Morphling": "#c41111",
+            "Swooper": "#c41111",
+            "Venerer": "#c41111",
+            "Bomber": "#c41111",
+            "Scavenger": "#c41111",
+            "Traitor": "#c41111",
+            "Warlock": "#c41111",
+            "Blackmailer": "#c41111",
+            "Hypnotist": "#c41111",
+            "Janitor": "#c41111",
+            "Miner": "#c41111",
+            "Undertaker": "#c41111"
+        };
+
+        // Define colors for modifier categories
+        const modifierTeamColors = {
+            "Crewmate Modifier": {
+                dotColor: '#00BFFF', // Deep Sky Blue
+            },
+            "Global Modifier": {
+                dotColor: '#FFD700', // Gold
+            },
+            "Impostor Modifier": {
+                dotColor: '#FF4500', // Orange Red
+            }
+        };
+
+        // Define unique colors for each individual modifier name, icon outline, and card outline
+        const modifierColors = {
+            // Crewmate Modifiers (converted to hex)
+            "Aftermath": "#A6FFB3",
+            "Bait": "#33B3B3",
+            "Celebrity": "#FF9999",
+            "Diseased": "#808080",
+            "Frosty": "#99FFFF",
+            "Multitasker": "#FF804D",
+            "Taskmaster": "#669966",
+            "Torch": "#FFFF99",
+
+            // Global Modifiers (converted to hex)
+            "Button Barry": "#E500FF",
+            "Flash": "#FF8080",
+            "Giant": "#FFB34D",
+            "Immovable": "#E5E5CC",
+            "Lovers": "#FF66CC",
+            "Mini": "#CCFFE5",
+            "Radar": "#FF0080",
+            "Satellite": "#0099CC",
+            "Shy": "#FFB3CC",
+            "Sixth Sense": "#D9FF8C",
+            "Sleuth": "#803333",
+            "Tiebreaker": "#99E599",
+
+            // Impostor Modifiers (converted to hex)
+            "Disperser": "#FF4500",
+            "Double Shot": "#FF0000",
+            "Saboteur": "#A52A2A",
+            "Underdog": "#CD5C5C"
+        };
+
+        // Raw settings from the provided file
+        const rawSavedSettings = `
+<color=#B34D99FF>Aurial</color>
+0
+<color=#4D4DFFFF>Detective</color>
+0
+<color=#D3D3D3FF>Haunter</color>
+50
+<color=#00B3B3FF>Investigator</color>
+0
+<color=#33FF66FF>Lookout</color>
+50
+<color=#4D99E6FF>Mystic</color>
+20
+<color=#FFCC80FF>Seer</color>
+5
+<color=#D4AF37FF>Snitch</color>
+40
+<color=#CCA3CCFF>Spy</color>
+10
+<color=#009900FF>Tracker</color>
+20
+<color=#A7D1B3FF>Trapper</color>
+40
+<color=#FFCC00FF>Deputy</color>
+40
+<color=#29AB87FF>Hunter</color>
+40
+<color=#FFFF00FF>Sheriff</color>
+40
+<color=#998040FF>Veteran</color>
+40
+<color=#FFFF99FF>Vigilante</color>
+40
+<color=#A6A6A6FF>Jailor</color>
+40
+<color=#660099FF>Politician</color>
+40
+<color=#B38000FF>Prosecutor</color>
+40
+<color=#66E666FF>Swapper</color>
+40
+<color=#660000FF>Altruist</color>
+45
+<color=#00FFB3FF>Cleric</color>
+40
+<color=#006600FF>Medic</color>
+40
+<color=#BF00BFFF>Oracle</color>
+40
+<color=#9900FFFF>Warden</color>
+40
+<color=#FFA60AFF>Engineer</color>
+40
+<color=#B3D94DFF>Imitator</color>
+40
+<color=#A680FFFF>Medium</color>
+40
+<color=#CC6600FF>Plumber</color>
+40
+<color=#00EEFFFF>Transporter</color>
+40
+<color=#80B2FFFF>Amnesiac</color>
+50
+<color=#B3FFFFFF>Guardian Angel</color>
+50
+<color=#8C6699FF>Mercenary</color>
+45
+<color=#FFE64DFF>Survivor</color>
+45
+<color=#00FF80FF>Doomsayer</color>
+45
+<color=#8C4005FF>Executioner</color>
+10
+<color=#FFBFCCFF>Jester</color>
+50
+<color=#662962FF>Phantom</color>
+55
+<color=#FF4D00FF>Arsonist</color>
+35
+<color=#00FF00FF>Glitch</color>
+45
+<color=#8C004DFF>Juggernaut</color>
+45
+<color=#E6FFB3FF>Plaguebearer</color>
+35
+<color=#99FFCCFF>Soul Collector</color>
+45
+<color=#262626FF>Vampire</color>
+25
+<color=#A86629FF>Werewolf</color>
+45
+<color=#FF0000FF>Eclipsal</color>
+50
+<color=#FF0000FF>Escapist</color>
+50
+<color=#FF0000FF>Grenadier</color>
+50
+<color=#FF0000FF>Morphling</color>
+50
+<color=#FF0000FF>Swooper</color>
+50
+<color=#FF0000FF>Venerer</color>
+50
+<color=#FF0000FF>Bomber</color>
+50
+<color=#FF0000FF>Scavenger</color>
+50
+<color=#FF0000FF>Traitor</color>
+50
+<color=#FF0000FF>Warlock</color>
+50
+<color=#FF0000FF>Blackmailer</color>
+45
+<color=#FF0000FF>Hypnotist</color>
+45
+<color=#FF0000FF>Janitor</color>
+45
+<color=#FF0000FF>Miner</color>
+45
+<color=#FF0000FF>Undertaker</color>
+50
+<color=#A6FFA6FF>Aftermath</color>
+50
+<color=#33B3B3FF>Bait</color>
+40
+<color=#FF9999FF>Celebrity</color>
+50
+<color=#808080FF>Diseased</color>
+40
+<color=#99FFFFFF>Frosty</color>
+40
+<color=#FF804DFF>Multitasker</color>
+50
+<color=#669966FF>Taskmaster</color>
+50
+<color=#FFFF99FF>Torch</color>
+50
+<color=#E600FFFF>Button Barry</color>
+40
+<color=#FF8080FF>Flash</color>
+50
+<color=#FFB34DFF>Giant</color>
+50
+<color=#E6E6CCFF>Immovable</color>
+50
+<color=#FF66CCFF>Lovers</color>
+50
+<color=#CCFFE6FF>Mini</color>
+50
+<color=#FF0080FF>Radar</color>
+50
+<color=#0099CCFF>Satellite</color>
+50
+<color=#FFB3CCFF>Shy</color>
+50
+<color=#D9FF8CFF>Sixth Sense</color>
+50
+<color=#803333FF>Sleuth</color>
+50
+<color=#99E699FF>Tiebreaker</color>
+50
+<color=#FF0000FF>Disperser</color>
+100
+<color=#FF0000FF>Double Shot</color>
+50
+<color=#FF0000FF>Saboteur</color>
+100
+<color=#FF0000FF>Underdog</color>
+100
+All Roles Are Unique
+True
+Slot 1
+7
+Slot 2
+7
+Slot 3
+17
+Slot 4
+7
+Slot 5
+8
+Slot 6
+7
+Slot 7
+9
+Slot 8
+7
+Slot 9
+7
+Slot 10
+17
+Slot 11
+7
+Slot 12
+12
+Slot 13
+7
+Slot 14
+7
+Slot 15
+17
+Choose Random Map
+True
+Skeld Chance
+50
+Mira Chance
+50
+Polus Chance
+50
+Airship Chance
+5
+Fungle Chance
+5
+Submerged Chance
+0
+Level Impostor Chance
+0
+Half Vision On Skeld/Mira HQ
+False
+Mira HQ Decreased Cooldowns
+0
+Airship/Submerged Increased Cooldowns
+0
+Skeld/Mira HQ Increased Short Tasks
+0
+Skeld/Mira HQ Increased Long Tasks
+0
+Airship/Submerged Decreased Short Tasks
+0
+Airship/Submerged Decreased Long Tasks
+0
+Better Polus Vent Layout
+True
+Vitals Moved To Lab
+True
+Cold Temp Moved To Death Valley
+True
+Reboot Wifi And Chart Course Swapped
+True
+Airship Doors Are Polus Doors
+True
+Camouflaged Comms
+True
+Kill Anyone During Camouflaged Comms
+True
+Impostors Can See The Roles Of Their Team
+True
+Dead Can See Everyone's Roles/Votes
+True
+Game Start Cooldowns
+10
+Temp Save Cooldown Reset
+5
+Parallel Medbay Scans
+True
+Disable Meeting Skip Button
+0
+First Death Shield Next Game
+True
+Crew Killers Continue Game
+True
+See Tasks During Round
+False
+See Tasks During Meetings
+True
+See Tasks When Dead
+True
+Impostor Assassins Count
+2
+Neutral Assassins Count
+2
+Amnesiac Turned Impostor Gets Ability
+True
+Amnesiac Turned Neutral Killing Gets Ability
+True
+Traitor Gets Ability
+True
+Number Of Assassin Kills
+15
+Assassin Can Kill More Than Once Per Meeting
+True
+Assassin Can Guess "Crewmate"
+True
+Assassin Can Guess Neutral Benign Roles
+True
+Assassin Can Guess Neutral Evil Roles
+True
+Assassin Can Guess Neutral Killing Roles
+True
+Assassin Can Guess Impostor Roles
+True
+Assassin Can Guess Crewmate Modifiers
+True
+Assassin Can Guess Lovers
+True
+Radiate Colour Range
+0.5
+Radiate Max Range
+1.5
+Sense Duration
+10
+Examine Cooldown
+25
+Show Detective Reports
+True
+Time Where Detective Will Have Role
+15
+Time Where Detective Will Have Faction
+30
+Tasks Remaining When Haunter Can Be Clicked
+5
+Tasks Remaining When Alert Is Sent
+1
+Haunter Reveals Neutral Roles
+True
+Who Can Click Haunter
+0
+Footprint Size
+5
+Footprint Interval
+0.10000001
+Footprint Duration
+10
+Anonymous Footprint
+False
+Footprint Vent Visible
+True
+Watch Cooldown
+10
+Lookout Watches Reset After Each Round
+True
+Maximum Number Of Players That Can Be Watched
+5
+Dead Body Arrow Duration
+0.2
+Seer Cooldown
+20
+Crewmate Killing Roles Are Red
+True
+Neutral Benign Roles Are Red
+True
+Neutral Evil Roles Are Red
+True
+Neutral Killing Roles Are Red
+True
+Traitor Does Not Swap Colours
+True
+Snitch Sees Neutral Roles
+False
+Tasks Remaining When Revealed
+1
+Snitch Sees Impostors In Meetings
+True
+Snitch Sees Traitor
+False
+Who Sees Dead Bodies On Admin
+1
+Arrow Update Interval
+0.5
+Track Cooldown
+10
+Tracker Arrows Reset After Each Round
+True
+Maximum Number Of Tracks
+10
+Min Amount Of Time In Trap To Register
+0.5
+Trap Cooldown
+10
+Traps Removed After Each Round
+True
+Maximum Number Of Traps
+5
+Trap Size
+0.25
+Minimum Number Of Roles Required To Trigger Trap
+3
+Hunter Kill Cooldown
+17.5
+Hunter Stalk Cooldown
+10
+Hunter Stalk Duration
+25
+Maximum Stalk Uses
+5
+Hunter Kills Last Voter If Voted Out
+True
+Hunter Can Report Who They've Killed
+True
+Sheriff Miskill Kills Crewmate
+False
+Sheriff Kills Neutral Evil Roles
+True
+Sheriff Kills Neutral Killing Roles
+True
+Sheriff Kill Cooldown
+22.5
+Sheriff Can Report Who They've Killed
+True
+Can Be Killed On Alert
+False
+Alert Cooldown
+22.5
+Alert Duration
+15
+Maximum Number Of Alerts
+5
+Number Of Vigilante Kills
+15
+Vigilante Can Kill More Than Once Per Meeting
+True
+Vigilante Can Guess Neutral Benign Roles
+True
+Vigilante Can Guess Neutral Evil Roles
+True
+Vigilante Can Guess Neutral Killing Roles
+True
+Vigilante Can Guess Impostor Modifiers
+True
+Vigilante Can Guess Lovers
+True
+Jail Cooldown
+10
+Maximum Number Of Executes
+4
+Campaign Cooldown
+15
+Prosecutor Dies When They Exile A Crewmate
+True
+Swapper Can Button
+True
+Altruist Revive Duration
+1
+Revive Uses
+2
+Revive Radius
+2
+Barrier Cooldown
+20
+Show Barriered Player
+1
+Cleric Gets Attack Notification
+True
+Show Shielded Player
+2
+Who Gets Murder Attempt Indicator
+0
+Shield Breaks On Murder Attempt
+False
+Show Medic Reports
+True
+Time Where Medic Will Have Color Type
+15
+Confess Cooldown
+10
+Initial Bless Cooldown
+10
+Reveal Accuracy
+0
+Neutral Benign Roles Show Evil
+True
+Neutral Evil Roles Show Evil
+True
+Neutral Killing Roles Show Evil
+True
+Show Fortified Player
+2
+Maximum Number Of Fixes
+10
+Mediate Cooldown
+4
+Reveal Appearance Of Mediate Target
+True
+Reveal The Medium To The Mediate Target
+True
+Who Is Revealed With Mediate
+2
+Flush Cooldown
+10
+Maximum Number Of Barricades
+6
+Transport Cooldown
+15
+Maximum Number Of Transports
+15
+Transporter Can Use Vitals
+True
+Amnesiac Gets Arrows Pointing To Dead Bodies
+True
+Time After Death Arrow Appears
+0
+Protect Cooldown
+15
+Protect Duration
+10
+Maximum Number Of Protects
+15
+Show Protected Player
+1
+GA Becomes On Target Dead
+1
+Target Knows GA Exists
+True
+GA Knows Targets Role
+True
+Odds Of Target Being Evil
+30
+Guard Cooldown
+10
+Maximum Number Of Guards
+5
+Gold To Bribe
+3
+Vest Cooldown
+25
+Vest Duration
+10
+Maximum Number Of Vests
+15
+Survivor Scatter Mechanic Enabled
+False
+Survivor Scatter Timer
+20
+Observe Cooldown
+5
+Doomsayer Guesses All Roles At Once
+False
+Doomsayer Can't Observe
+False
+Doomsayer Win Ends Game
+True
+Executioner Becomes On Target Dead
+1
+Executioner Can Button
+True
+Executioner Win
+0
+Jester Can Button
+True
+Jester Can Hide In Vents
+True
+Jester Has Impostor Vision
+True
+Jester Scatter Mechanic Enabled
+False
+Jester Scatter Timer
+60
+Jester Win
+0
+Tasks Remaining When Phantom Can Be Clicked
+3
+Phantom Win Ends Game
+True
+Douse Cooldown
+22.5
+Ignite Radius
+1
+Arsonist Can Vent
+True
+Mimic Cooldown
+20
+Mimic Duration
+15
+Hack Cooldown
+20
+Hack Duration
+15
+Glitch Kill Cooldown
+25
+Glitch Can Vent
+True
+Juggernaut Initial Kill Cooldown
+30
+Reduced Kill Cooldown Per Kill
+5
+Juggernaut Can Vent
+True
+Infect Cooldown
+20
+Pestilence Kill Cooldown
+25
+Pestilence Can Vent
+True
+Reap Cooldown
+25
+Soul Collector Can Vent
+True
+Vampire Bite Cooldown
+25
+Vampires Have Impostor Vision
+True
+Vampires Can Vent
+True
+New Vampire Can Assassinate
+True
+Maximum Vampires Per Game
+2
+Can Convert Neutral Benign Roles
+True
+Can Convert Neutral Evil Roles
+True
+Rampage Cooldown
+25
+Rampage Duration
+25
+Rampage Kill Cooldown
+10
+Werewolf Can Vent When Rampaged
+True
+Blind Cooldown
+25
+Blind Duration
+25
+Blind Radius
+2
+Recall Cooldown
+20
+Escapist Can Vent
+True
+Flash Grenade Cooldown
+25
+Flash Grenade Duration
+15
+Flash Radius
+2
+Grenadier Can Vent
+True
+Morphling Cooldown
+20
+Morphling Duration
+15
+Morphling Can Vent
+True
+Swoop Cooldown
+25
+Swoop Duration
+15
+Swooper Can Vent
+True
+Ability Cooldown
+20
+Ability Duration
+15
+Sprint Speed
+1.4999998
+Minimum Freeze Speed
+0.15
+Freeze Radius
+2
+Detonate Delay
+5
+Max Kills In Detonation
+15
+Detonate Radius
+0.50000006
+Bomber Can Vent
+True
+All Impostors See Bomb
+True
+Scavenge Duration
+20
+Scavenge Duration Increase Per Kill
+10
+Scavenge Kill Cooldown On Correct Kill
+10
+Kill Cooldown Multiplier On Incorrect Kill
+2.5
+Minimum People Alive When Traitor Can Spawn
+5
+Traitor Won't Spawn If Any Neutral Killing Is Alive
+False
+Time It Takes To Fully Charge
+20
+Time It Takes To Use Full Charge
+1.1999998
+Initial Blackmail Cooldown
+10
+Only Target Sees Blackmail
+False
+Maximum People Alive Where Blackmailed Can Vote
+5
+Hypnotize Cooldown
+20
+Mine Cooldown
+20
+Drag Cooldown
+20
+Undertaker Drag Speed
+0.9
+Undertaker Can Vent
+True
+Undertaker Can Vent While Dragging
+True
+Minimum Delay for the Bait Report
+1
+Maximum Delay for the Bait Report
+1
+Diseased Kill Multiplier
+3
+Chill Duration
+10
+Chill Start Speed
+0.75
+Flash Speed
+2.5
+Giant Speed
+0.49999988
+Both Lovers Die
+True
+Loving Impostor Probability
+40
+Neutral Roles Can Be Lovers
+True
+Impostor Lover Can Kill Teammate
+True
+Broadcast Duration
+10
+Transparency Delay
+3
+Turn Transparent Duration
+5
+Final Opacity
+80
+Reduced Sabotage Bonus
+15
+Kill Cooldown Bonus
+5
+Increased Kill Cooldown When 2+ Imps
+True
+`;
+
+        // Function to parse the settings from the text file into a flat object
+        function parseSettings(text) {
+            const lines = text.split('\n').map(line => line.trim()).filter(line => line.length > 0);
+            const settings = {};
+            for (let i = 0; i < lines.length; i++) {
+                let key = lines[i];
+                // Remove color tags like <color=#B34D99FF> and </color>
+                key = key.replace(/<color=#[0-9A-Fa-f]{8}>/g, '').replace(/<\/color>/g, '');
+
+                // Check if the next line exists and is a value (not another key starting with <color=)
+                // This heuristic assumes settings are always key-value pairs on consecutive lines
+                if (i + 1 < lines.length && !lines[i + 1].startsWith('<color=')) {
+                    const value = lines[++i]; // Consume the next line as the value
+                    settings[key] = value;
+                } else if (i + 1 < lines.length && lines[i + 1].startsWith('<color=')) {
+                    // This is a role name, and the next line is its probability.
+                    // The role name itself is the key, and the next line is the value.
+                    const value = lines[++i];
+                    settings[key] = value;
+                }
+                // If it's a single line that doesn't fit the pattern, it might be an anomaly or a header.
+                // For this specific file, it seems every other line is a value.
+            }
+            return settings;
+        }
+
+        const initialParsedSettings = parseSettings(rawSavedSettings); // Keep a copy of all parsed settings
+        const currentParsedSettings = { ...initialParsedSettings }; // Create a mutable copy for removal
+
+        // Define a list of all known role and modifier names to distinguish from general settings
+        const allEntityNames = [
+            "Aurial", "Detective", "Haunter", "Investigator", "Lookout", "Mystic", "Seer", "Snitch", "Spy", "Tracker", "Trapper",
+            "Deputy", "Hunter", "Sheriff", "Veteran", "Vigilante", "Altruist", "Cleric", "Medic", "Oracle", "Warden", "Engineer",
+            "Imitator", "Mayor", "Medium", "Plumber", "Politician", "Prosecutor", "Swapper", "Transporter",
+            "Amnesiac", "Guardian Angel", "Mercenary", "Survivor", "Doomsayer", "Executioner", "Jester", "Phantom", "Soul Collector",
+            "Arsonist", "Juggernaut", "Plaguebearer", "Pestilence", "Glitch", "Vampire", "Werewolf",
+            "Eclipsal", "Escapist", "Grenadier", "Morphling", "Swooper", "Venerer", "Bomber", "Scavenger", "Traitor", "Warlock",
+            "Blackmailer", "Hypnotist", "Janitor", "Miner", "Undertaker",
+            "Aftermath", "Bait", "Celebrity", "Diseased", "Frosty", "Multitasker", "Taskmaster", "Torch",
+            "Button Barry", "Flash", "Giant", "Immovable", "Lovers", "Mini", "Radar", "Satellite", "Shy", "Sixth Sense", "Sleuth", "Tiebreaker",
+            "Disperser", "Double Shot", "Saboteur", "Underdog"
+        ];
+
+        // Combined data for roles and modifiers (initial data without settings)
+        const allEntitiesData = [
+            // Crewmate Roles
+            { category: "Role", name: "Aurial", team: "Crewmate", desc: "The Aurial is a Crewmate that can sense when players use an ability nearby. If a player is very close they will even know who used the ability.", ability: "Passive Ability", icon: 'aurial.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Detection", "Other"] },
+            { category: "Role", name: "Detective", team: "Crewmate", desc: "The Detective has a 2 step ability. The first stage involves inspecting a crime scene. Once a crime scene is inspected they can then examine other players on cooldown to see if that player was at the scene of the crime. Crime scenes spawn at each dead body. They also get a detective report telling them the type of killer if they examine someone’s body.", ability: "Inspect / Examine", icon: 'detective.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=IE', types: ["Detection"] },
+            { category: "Role", name: "Haunter", team: "Crewmate", desc: "Once a random crewmate dies they become the Haunter. The Haunter has the ability to run around as a ghost and to do tasks. Once all tasks are finished they reveal the impostors to all alive non-impostors. However, to stop them from finishing their tasks they can be clicked by the impostors which kills them and negates their ability. The impostors also get a warning shortly before and as the Haunter finishes their tasks.", ability: "Passive Ability", icon: 'haunter.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Detection", "Utility", "Other"] },
+            { category: "Role", name: "Investigator", team: "Crewmate", desc: "The Investigator is a crewmate who can see footprints for a certain duration.", ability: "View Footprints", icon: 'investigator.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=VF', types: ["Detection"] },
+            { category: "Role", name: "Lookout", team: "Crewmate", desc: "The Lookout is a crewmate who can watch other players. The following meeting, the Lookout will see all roles who interacted with all watched players after they began watching them.", ability: "Watch Player", icon: 'lookout.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=WP', types: ["Detection"] },
+            { category: "Role", name: "Mystic", team: "Crewmate", desc: "The Mystic is a crewmate who gets a flash on their screen, every time someone dies, on top of this, they also get an arrow briefly pointing in the rough direction of the body.", ability: "Passive Ability", icon: 'mystic.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Detection", "Other"] },
+            { category: "Role", name: "Seer", team: "Crewmate", desc: "The Seer is a crewmate who can reveal a player’s alliance on a cooldown. All neutral roles and crew killing roles are customisable, however, all Impostors (except Traitor) always show red, and non-crew killing show green.", ability: "Reveal Alliance", icon: 'seer.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=RA', types: ["Detection"] },
+            { category: "Role", name: "Snitch", team: "Crewmate", desc: "The Snitch is a crewmate who can find out the Impostors via finishing tasks. Once the Snitch finishes all their tasks they reveal the impostors to themselves via arrows and their names are highlighted red. The impostors also get a warning shortly before and as the Snitch finishes their tasks.", ability: "Passive Ability", icon: 'snitch.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Detection", "Other"] },
+            { category: "Role", name: "Spy", team: "Crewmate", desc: "The Spy is a crewmate who gains extra information via the admin table. On admin they not only see how many people are in a room, but also see who is in what room.", ability: "Passive Ability", icon: 'spy.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Detection", "Other"] },
+            { category: "Role", name: "Tracker", team: "Crewmate", desc: "The Tracker is a crewmate who can track people on a cooldown. Foreach person they track, they see an arrow of the colour of the person they tracked, pointing towards them which updates in specific intervals.", ability: "Track Player", icon: 'tracker.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=TP', types: ["Detection"] },
+            { category: "Role", name: "Trapper", team: "Crewmate", desc: "The Trapper is a crewmate who can place traps. When a meeting is called the Trapper receives information on which roles entered the trap.", ability: "Place Trap", icon: 'trapper.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=PT', types: ["Detection", "Utility"] },
+            { category: "Role", name: "Deputy", team: "Crewmate", desc: "The Deputy is a crewmate who can camp other players. Once a camped player dies the Deputy is alerted to their death. The following meeting the Deputy may then attempt to shoot the killer of the camped player. If successful the killer dies and if not nothing happens.", ability: "Camp / Shoot", icon: 'deputy.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=CS', types: ["Kill", "Detection"] },
+            { category: "Role", name: "Hunter", team: "Crewmate", desc: "The Hunter is a crewmate who can stalk people for a short duration. If a stalked player uses an ability the Hunter may then be able to kill them.", ability: "Stalk (Kill on Use)", icon: 'hunter.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=SK', types: ["Kill", "Detection"] },
+            { category: "Role", name: "Jailor", team: "Crewmate", desc: "The Jailor is a crewmate who can Jail players and during meetings may decide whether to Execute them. The Jailor may also anonymously communicate with their jailed target via the text chat. Everyone sees who is jailed, the jailed player may not use any meeting ability, and no meeting ability (other than prosecute) may be used on the jailed player. If the Jailor executes incorrectly, they lose the ability to jail.", ability: "Jail / Execute", icon: 'jailor.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=JE', types: ["Kill", "Utility"] },
+            { category: "Role", name: "Sheriff", team: "Crewmate", desc: "The Sheriff is a crewmate who can kill, their job is to kill the Impostors, however, if they attempt to kill a crewmate, they will die themselves.", ability: "Kill", icon: 'sheriff.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=K', types: ["Kill"] },
+            { category: "Role", name: "Veteran", team: "Crewmate", desc: "The Veteran is a crewmate who has the option to go on alert. When they are on alert they will kill whoever interacts with them, this includes, tracking, shielding, seering, dousing, hacking and even killing!", ability: "Toggle Alert", icon: 'veteran.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=TA', types: ["Kill", "Support"] },
+            { category: "Role", name: "Vigilante", team: "Crewmate", desc: "The Vigilante is a crewmate who has the option during a meeting to guess someone else's role, if they are correct the other person dies, if the Vigilante is incorrect, the Vigilante dies.", ability: "Guess Role", icon: 'vigilante.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=GR', types: ["Kill"] },
+            { category: "Role", name: "Altruist", team: "Crewmate", desc: "The Altruist is a crewmate who can revive other players. To do this they must be located near a body. When they start reviving all Neutral Killers and Impostors get an alert that an Altruist is reviving and an arrow pointing towards the Altruist. After the revive duration ends, killers instead get an arrow to all revived players. The Altruist and revived players cannot button once a revive has taken place.", ability: "Revive", icon: 'altruist.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=R', types: ["Support"] },
+            { category: "Role", name: "Cleric", team: "Crewmate", desc: "The Cleric is a crewmate who can barrier other players, providing temporary defence and cleanse other players, removing all negative effects (e.g. blackmail, douse).", ability: "Barrier / Cleanse", icon: 'cleric.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=BC', types: ["Support"] },
+            { category: "Role", name: "Medic", team: "Crewmate", desc: "The Medic is a crewmate who can shield another player. If the shielded player is attacked, the Medic is alerted to this and the shield saves the other player from dying.", ability: "Shield Player", icon: 'medic.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=SP', types: ["Support"] },
+            { category: "Role", name: "Oracle", team: "Crewmate", desc: "During rounds the Oracle can choose to make someone confess on their demise (death). The alliance of that player is revealed to a certain accuracy to everyone in the meeting after the Oracle’s death. In addition to that, the Oracle will receive a confession from that player at the start of each meeting, they will receive information that either that confessing player, or 2 others is evil. They also have another ability, bless, that provides someone immunity during meetings!", ability: "Confess / Bless", icon: 'oracle.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=CB', types: ["Detection", "Support"] },
+            { category: "Role", name: "Warden", team: "Crewmate", desc: "The Warden is a crewmate who can Fortify a player, if anyone interacts with this fortified player the ability will fail and both the Warden and person attempting to use an ability will get a purple flash on their screen.", ability: "Fortify Player", icon: 'warden.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=FP', types: ["Support"] },
+            { category: "Role", name: "Engineer", team: "Crewmate", desc: "The Engineer is a crewmate who can both vent and fix sabotages.", ability: "Vent / Fix Sabotage", icon: 'engineer.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=VFS', types: ["Utility"] },
+            { category: "Role", name: "Imitator", team: "Crewmate", desc: "The Imitator is a crewmate who can use fallen crewmates to their advantage. During meetings the Imitator can select a player who they wish to imitate the following round. They will not know what role they are imitating until the following round.", ability: "Imitate Role", icon: 'imitator.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=IR', types: ["Utility", "Other"] },
+            { category: "Role", name: "Mayor", team: "Crewmate", desc: "Once per game the Mayor can reveal themselves as the Mayor mid-meeting, once done so they gain an additional 2 votes.", ability: "Reveal as Mayor", icon: 'mayor.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=RM', types: ["Utility"] },
+            { category: "Role", name: "Medium", team: "Crewmate", desc: "The Medium is a crewmate who can see ghosts. During rounds the Medium has an option to Mediate, which lets ghosts know who the Medium is, as well as where they are, and the same thing for the Medium in reverse.", ability: "Mediate", icon: 'medium.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=M', types: ["Utility", "Detection"] },
+            { category: "Role", name: "Plumber", team: "Crewmate", desc: "The Plumber is a crewmate who can flush vents, ejecting all players in vents at that moment and barricade vents, placing a barricade on that vent the following round.", ability: "Flush / Barricade", icon: 'plumber.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=FB', types: ["Utility", "Sabotage"] },
+            { category: "Role", name: "Politician", team: "Crewmate", desc: "The Politician is a crewmate who can campaign to other players. During meetings they may attempt to reveal themselves as the Mayor. If they have received enough votes from Crewmates (must be Crewmates not Neutral or Impostors) they will reveal, if not they may not campaign the following round.", ability: "Campaign to Reveal", icon: 'politician.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=CR', types: ["Utility"] },
+            { category: "Role", name: "Prosecutor", team: "Crewmate", desc: "The Prosecutor has 2 abilities, one is the ability for them to see all the votes (non-anonymous voting), the other, once per game during a meeting the Prosecutor can prosecute someone, making all other votes redundant and having whoever the Prosecutor selected exiled that meeting.", ability: "Prosecute", icon: 'prosecutor.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Utility", "Detection"] },
+            { category: "Role", name: "Swapper", team: "Crewmate", desc: "The Swapper is a crewmate who can swap two players during a meeting.", ability: "Swap Players", icon: 'swapper.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=SP', types: ["Utility"] },
+            { category: "Role", name: "Transporter", team: "Crewmate", desc: "The Transporter is a crewmate who can swap the locations of two people on cooldown at will. The other two people have no knowledge or control of when it will happen. The Transporter just does what they want, when they want to.", ability: "Transport", icon: 'transporter.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=T', types: ["Utility"] },
+
+            // Neutral Roles
+            { category: "Role", name: "Amnesiac", team: "Neutral", desc: "The Amnesiac is a neutral role which can remember the role of a dead player. Their objective is to find a dead body in order to remember who they were. This means they can remember that they were an Impostor!", ability: "Remember Role", icon: 'amnesiac.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=RR', types: ["Other"] },
+            { category: "Role", name: "Guardian Angel", team: "Neutral", desc: "The Guardian Angel is a neutral role which has one job, to protect their target and make sure they live. If their target wins they win.", ability: "Protect Target", icon: 'guardian_angel.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=PT', types: ["Support"] },
+            { category: "Role", name: "Mercenary", team: "Neutral", desc: "The Mercenary is a neutral role which can guard other players, allowing them to absorb abilities on other players. And bribe, using gold (from converting absorbed abilities) to bribe other players to join their team. If any bribed player lives and wins, the Mercenary does too.", ability: "Guard / Bribe", icon: 'mercenary.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=GB', types: ["Support"] },
+            { category: "Role", name: "Survivor", team: "Neutral", desc: "The Survivor is a neutral role which has to live to win, however, if any neutral evil role or lovers win the Survivor still loses.", ability: "No Active Ability", icon: 'survivor.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=NA', types: ["Other"] },
+            { category: "Role", name: "Doomsayer", team: "Neutral", desc: "The Doomsayer wins by guessing 3 player’s roles at the same time. The Doomsayer also has an observe ability hinting at other player’s roles.", ability: "Observe / Guess", icon: 'doomsayer.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=OG', types: ["Detection", "Other"] },
+            { category: "Role", name: "Executioner", team: "Neutral", desc: "The Executioner is a neutral role who needs to vote out a certain crewmate to win.", ability: "No Active Ability", icon: 'executioner.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=NA', types: ["Other"] },
+            { category: "Role", name: "Jester", team: "Neutral", desc: "The Jester is a neutral role who needs to be voted out to win.", ability: "No Active Ability", icon: 'jester.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=NA', types: ["Other"] },
+            { category: "Role", name: "Phantom", team: "Neutral", desc: "Once a random crewmate dies they become the Phantom. To win the Phantom needs to complete all their tasks, however, to stop them any player can click them which kills them.", ability: "Passive Ability", icon: 'phantom.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Other"] },
+            { category: "Role", name: "Soul Collector", team: "Neutral", desc: "The Soul Collector wins by collecting a certain number of souls. Each round the Soul Collector may Reap players and Collect souls. For a soul to spawn a player must first be reaped and then they must die. Everyone sees a soul on the ground for the remaining duration of the round since a soul spawns. The Soul Collector sees the soul until they collect it.", ability: "Reap / Collect Souls", icon: 'soul_collector.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=CS', types: ["Kill", "Other"] },
+            { category: "Role", name: "Arsonist", team: "Neutral", desc: "The Arsonist is a neutral role who needs to kill everyone to win. The Arsonist however, does not have a kill button. Instead they need to douse and ignite people. The Arsonist is unique in that they can kill multiple people at once with one ignite, when they ignite all douses nearby die.", ability: "Douse / Ignite", icon: 'arsonist.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=DI', types: ["Kill", "Sabotage"] },
+            { category: "Role", name: "Juggernaut", team: "Neutral", desc: "The Juggernaut is a neutral role who needs to kill everyone to win. The Juggernaut's special querk is that they have an altered kill cooldown which decreases with each kill. The starting kill cooldown is the Glitch kill cooldown plus 5 seconds.", ability: "Kill", icon: 'juggernaut.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=K', types: ["Kill"] },
+            { category: "Role", name: "Plaguebearer", team: "Neutral", desc: "The Plaguebearer is a neutral role who needs to infect everyone to turn into Pestilence (not win the game). The infection can be spread by other players via seering, tracking, examining, killing etc.", ability: "Infect", icon: 'plaguebearer.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=I', types: ["Kill", "Sabotage"] },
+            { category: "Role", name: "Pestilence", team: "Neutral", desc: "The Pestilence is a neutral role who needs to kill everyone to win, however the only way to get rid of Pestilence is by voting it out in a meeting, otherwise it is unkillable.", ability: "Passive Ability", icon: 'pestilence.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Kill", "Sabotage", "Other"] },
+            { category: "Role", name: "Glitch", team: "Neutral", desc: "The Glitch is a neutral role who needs to kill everyone to win. The glitch also has additional abilities including hacking, which disables all abilities of the hacked player, and mimicing which makes them transform into another player.", ability: "Glitch / Mimic", icon: 'glitch.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=GM', types: ["Kill", "Sabotage"] },
+            { category: "Role", name: "Vampire", team: "Neutral", desc: "The Vampire and Vampire Faction wins by being the only players alive. During the game Vampires can bite other players. Every player a Vampire bites dies, except the first Crewmate, in this case the Crewmate is converted into a Vampire and loses their original ability. The only exception to this is when they bite a Vampire Hunter, in this case the Vampire Hunter stakes the Vampire. Once there are 2 Vampires alive no more players can be converted into Vampires, however, depending on settings if 1 dies they may be able to convert again.", ability: "Bite", icon: 'vampire.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=B', types: ["Kill"] },
+            { category: "Role", name: "Werewolf", team: "Neutral", desc: "The Werewolf is a neutral role who needs to kill everyone to win. The Werewolf cannot kill unless they are rampaged. Once they are rampaged the Werewolf can kill multiple people during a short duration.", ability: "Transform / Rampage", icon: 'werewolf.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=TR', types: ["Kill"] },
+
+            // Impostor Roles
+            { category: "Role", name: "Eclipsal", team: "Impostor", desc: "The Eclipsal is an Impostor who can blind other players for a moderate amount of time. Blinded players have Ox vision and their report button doesn't light up.", ability: "Blind", icon: 'eclipsal.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=B', types: ["Sabotage"] },
+            { category: "Role", name: "Escapist", team: "Impostor", desc: "The Escapist is an Impostor who can teleport to a desired location on the map whenever they feel like (on cooldown).", ability: "Teleport", icon: 'escapist.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=T', types: ["Utility"] },
+            { category: "Role", name: "Grenadier", team: "Impostor", desc: "The Grenadier is an Impostor who can throw down a flash grenade. When this is done all players inside a small radius get blinded by the flash grenade.", ability: "Throw Grenade", icon: 'grenadier.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=TG', types: ["Kill"] },
+            { category: "Role", name: "Morphling", team: "Impostor", desc: "The Morphling is an Impostor who can transform into another player. They can do this by sampling a player and then can proceed to morph into that player for a short period of time.", ability: "Sample / Morph", icon: 'morphling.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=SM', types: ["Utility", "Sabotage"] },
+            { category: "Role", name: "Swooper", team: "Impostor", desc: "The Swooper is an Impostor who can turn invisible for a short period of time.", ability: "Turn Invisible", icon: 'swooper.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=TI', types: ["Utility"] },
+            { category: "Role", name: "Venerer", team: "Impostor", desc: "The Venerer is an Impostor who gains perks for killing. The perks in order are: a camouflage ability (for just the Venerer), a sprint ability and finally a freeze ability which temporarily slows all players except the Venerer.", ability: "Passive Ability", icon: 'venerer.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Sabotage", "Utility"] },
+            { category: "Role", name: "Bomber", team: "Impostor", desc: "The Bomber is an Impostor who can plant bombs around the map. When a bomb is planted it will detonate x seconds later (according to settings). Once detonated the bomb will kill anyone in the radius of the blast, including themselves or teammates.", ability: "Plant Bomb", icon: 'bomber.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=PB', types: ["Kill", "Sabotage"] },
+            { category: "Role", name: "Scavenger", team: "Impostor", desc: "The Scavenger is an Impostor who must hunt down prey. When their kill cooldown becomes available they are given a timer and a target, if they kill the target the timer increases and they get a new target, if they kill wrong they get a significantly increased kill cooldown and if they don't kill anyone their kill cooldown resets.", ability: "Scavenge / Hunt", icon: 'scavenger.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=SH', types: ["Utility", "Sabotage"] },
+            { category: "Role", name: "Traitor", team: "Impostor", desc: "Once all Impostors die, a random crewmate becomes the Traitor, the Traitor can select an Impostor role to be and their sole purpose is to avenge all fallen Impostors.", ability: "No Active Ability", icon: 'traitor.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=NA', types: ["Other"] },
+            { category: "Role", name: "Warlock", team: "Impostor", desc: "The Warlock is an Impostor who can charge up their kill button by not killing for a long duration. Once the Warlock hits kill their charge starts decreasing and the Warlock can keep killing until this charge runs out.", ability: "Charge Kill", icon: 'warlock.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=CK', types: ["Sabotage"] },
+            { category: "Role", name: "Blackmailer", team: "Impostor", desc: "The Blackmailer is an Impostor who can silence a player in a meeting. During each round the Blackmailer can go up to someone to blackmail them. This prevents the blackmailed player from being able to talk in meetings.", ability: "Blackmail", icon: 'blackmailer.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=B', types: ["Sabotage"] },
+            { category: "Role", name: "Hypnotist", team: "Impostor", desc: "The Hypnotist is an Impostor who can Hypnotise players. During a meeting they may then release Mass Hysteria, once released the Hypnotist can no longer hypnotise other players and all hypnotised players now see everyone else as either themselves, camouflaged or invisible.", ability: "Hypnotize / Mass Hysteria", icon: 'hypnotist.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=HMH', types: ["Sabotage"] },
+            { category: "Role", name: "Janitor", team: "Impostor", desc: "The Janitor is an Impostor who can choose between killing and cleaning. If they choose to clean a body the body disappears and becomes unreportable.", ability: "Clean Body", icon: 'janitor.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=CB', types: ["Utility"] },
+            { category: "Role", name: "Miner", team: "Impostor", desc: "The Miner is an Impostor who can place vents around the map. These vents can be used by anyone who can vent and the vents are all connected to each other via a vent system.", ability: "Place Vent", icon: 'miner.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=PV', types: ["Utility"] },
+            { category: "Role", name: "Undertaker", team: "Impostor", desc: "The Undertaker is an Impostor who can drag and drop bodies to hide them in certain locations.", ability: "Drag Body", icon: 'undertaker.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=DB', types: ["Utility"] },
+
+            // Crewmate Modifiers
+            { category: "Modifier", name: "Aftermath", team: "Crewmate Modifier", desc: "Aftermath is a Crewmate Modifier which activates upon death. Once the Aftermath is killed the killer of the Aftermath will be forced to use their ability (will have no effect if ability is in use or the killer has no viable ability).", ability: "Passive Ability", icon: 'aftermath.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Death Trigger"] },
+            { category: "Modifier", name: "Bait", team: "Crewmate Modifier", desc: "Bait is a Crewmate Modifier which activates upon death. Once the Bait is killed the killer of the Bait will be forced to report their body.", ability: "Passive Ability", icon: 'bait.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Death Trigger"] },
+            { category: "Modifier", name: "Celebrity", team: "Crewmate Modifier", desc: "Celebrity is a Crewmate Modifier that activates the meeting following the Celebrity's death. It tells everyone how, when and where the Celebrity died.", ability: "Passive Ability", icon: 'celebrity.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Death Trigger", "Information"] },
+            { category: "Modifier", name: "Diseased", team: "Crewmate Modifier", desc: "Diseased is a Crewmate Modifier which activates upon death. Once the Diseased is killed the killer of the Diseased will have an increased kill cooldown before they kill again or a meeting is called.", ability: "Passive Ability", icon: 'diseased.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Death Trigger", "Debuff"] },
+            { category: "Modifier", name: "Frosty", team: "Crewmate Modifier", desc: "Frosty is a Crewmate Modifier which activates upon death. Once the Frosty is killed their killer will be temporarily slowed.", ability: "Passive Ability", icon: 'frosty.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Death Trigger", "Debuff"] },
+            { category: "Modifier", name: "Multitasker", team: "Crewmate Modifier", desc: "Multitasker is a Crewmate Modifier which makes all tasks transparent.", ability: "Passive Ability", icon: 'multitasker.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Utility"] },
+            { category: "Modifier", name: "Taskmaster", team: "Crewmate Modifier", desc: "Taskmaster is a Crewmate Modifier which makes the player automatically complete a random task following each meeting.", ability: "Passive Ability", icon: 'taskmaster.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Utility"] },
+            { category: "Modifier", name: "Torch", team: "Crewmate Modifier", desc: "Torch is a Crewmate Modifier which makes lights ineffective against themselves.", ability: "Passive Ability", icon: 'torch.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Utility"] },
+
+            // Global Modifiers
+            { category: "Modifier", name: "Button Barry", team: "Global Modifier", desc: "Button Barry is a Global Modifier which allows themself to button from anywhere on the map, even if a sabotage is currently active.", ability: "Passive Ability", icon: 'buttonbarry.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Utility"] },
+            { category: "Modifier", name: "Flash", team: "Global Modifier", desc: "Flash is a Global Modifier which gives the player increased speed.", ability: "Passive Ability", icon: 'flash.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Buff"] },
+            { category: "Modifier", name: "Giant", team: "Global Modifier", desc: "Giant is a Global Modifier which increases the size of a player.", ability: "Passive Ability", icon: 'giant.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Buff"] },
+            { category: "Modifier", name: "Immovable", team: "Global Modifier", desc: "Immovable is a Global Modifier which makes the player unable to be moved by disperse, transport and meetings.", ability: "Passive Ability", icon: 'immovable.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Defense"] },
+            { category: "Modifier", name: "Lovers", team: "Global Modifier", desc: "Lovers is a Global Modifier which links two players who can both chat with each other during rounds and win together in the final 3 if both players are alive.", ability: "Passive Ability", icon: 'lovers.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Social", "Win Condition"] },
+            { category: "Modifier", name: "Mini", team: "Global Modifier", desc: "Mini is a Global Modifier which decreases the size of a player.", ability: "Passive Ability", icon: 'mini.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Debuff"] },
+            { category: "Modifier", name: "Radar", team: "Global Modifier", desc: "Radar is a Global Modifier which allows the player to see where the closest player to them currently is. This includes if they are inside a vent.", ability: "Passive Ability", icon: 'radar.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Detection"] },
+            { category: "Modifier", name: "Satellite", team: "Global Modifier", desc: "Satellite is a Global Modifier which allows the player to have a 1 time ability to detect all dead bodies on the map for a short duration.", ability: "Detect Dead Bodies", icon: 'satellite.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=DDB', types: ["Active", "Detection"] },
+            { category: "Modifier", name: "Shy", team: "Global Modifier", desc: "Shy is a Global Modifier which allows the player to become more transparent the longer they stand still.", ability: "Passive Ability", icon: 'shy.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Utility"] },
+            { category: "Modifier", name: "Sixth Sense", team: "Global Modifier", desc: "Sixth Sense is a Global Modifier which allows the player to know when someone interacts with them.", ability: "Passive Ability", icon: 'sixth_sense.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Detection"] },
+            { category: "Modifier", name: "Sleuth", team: "Global Modifier", desc: "Sleuth is a Global Modifier which allows the player to see the dead player’s roles of who they report during meetings.", ability: "Passive Ability", icon: 'sleuth.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Detection"] },
+            { category: "Modifier", name: "Tiebreaker", team: "Global Modifier", desc: "Tiebreaker is a Global Modifier which gives the player the ability to break a tie during a meeting. In other words, whoever the Tiebreaker votes for has an extra half vote for that meeting.", ability: "Break Tie Vote", icon: 'tiebreaker.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=BTV', types: ["Active", "Utility"] },
+
+            // Impostor Modifiers
+            { category: "Modifier", name: "Disperser", team: "Impostor Modifier", desc: "Disperser is an Impostor Modifier which has a 1 time use ability to send all players to a random vent on the map.", ability: "Disperse Players", icon: 'disperse.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=DP', types: ["Active", "Sabotage"] },
+            { category: "Modifier", name: "Double Shot", team: "Impostor Modifier", desc: "Double Shot is an Impostor Modifier who has an extra life when assassinating. When the Double Shot has their first incorrect guess they will receive a red flash on their screen and be unable to guess who they guessed incorrectly for the remainder of that meeting.", ability: "Passive Ability", icon: 'doubleshot.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Kill", "Defense"] },
+            { category: "Modifier", name: "Saboteur", team: "Impostor Modifier", desc: "Saboteur is an Impostor Modifier which passively decreases non-door sabotage cooldowns.", ability: "Passive Ability", icon: 'saboteur.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Sabotage"] },
+            { category: "Modifier", name: "Underdog", team: "Impostor Modifier", desc: "Underdog is an Impostor Modifier which grants the player a decreased kill cooldown when they are the last Impostor, however, when they have a teammate which is still alive (adjustable by settings), they may have an increased cooldown while that teammate is still alive.", ability: "Passive Ability", icon: 'underdog.png', skillIcon: 'https://placehold.co/24x24/00FFFF/white?text=P', types: ["Passive", "Kill", "Buff"] }
+        ];
+
+        // Helper to add a setting to an entity's settings array and remove it from the general settings pool
+        function addAndRemoveSetting(entitySettingsArray, settingNameInFile, displaySettingName) {
+            if (currentParsedSettings[settingNameInFile] !== undefined) {
+                entitySettingsArray.push({ name: displaySettingName, value: currentParsedSettings[settingNameInFile] });
+                delete currentParsedSettings[settingNameInFile]; // Remove from general settings pool
+            }
+        }
+
+        // Function to assign settings from parsedSettings to allEntitiesData
+        function assignSettingsToEntities() {
+            allEntitiesData.forEach(entity => {
+                // Initialize settings array for each entity
+                entity.settings = [];
+
+                // Add "Probability Of Appearing" for all roles/modifiers if it exists
+                if (currentParsedSettings[entity.name] !== undefined) {
+                    entity.settings.push({ name: "Probability Of Appearing", value: `${currentParsedSettings[entity.name]}%` });
+                    delete currentParsedSettings[entity.name]; // Remove from general settings pool
+                }
+
+                // Add specific settings based on role name and remove them from currentParsedSettings
+                switch (entity.name) {
+                    case "Altruist":
+                        addAndRemoveSetting(entity.settings, "Altruist Revive Duration", "Revive Duration");
+                        addAndRemoveSetting(entity.settings, "Revive Uses", "Revive Uses");
+                        addAndRemoveSetting(entity.settings, "Revive Radius", "Revive Radius");
+                        break;
+                    case "Detective":
+                        addAndRemoveSetting(entity.settings, "Examine Cooldown", "Examine Cooldown");
+                        addAndRemoveSetting(entity.settings, "Show Detective Reports", "Show Detective Reports");
+                        addAndRemoveSetting(entity.settings, "Time Where Detective Will Have Role", "Time For Role Info");
+                        addAndRemoveSetting(entity.settings, "Time Where Detective Will Have Faction", "Time For Faction Info");
+                        break;
+                    case "Haunter":
+                        addAndRemoveSetting(entity.settings, "Tasks Remaining When Haunter Can Be Clicked", "Tasks Remaining When Clickable");
+                        addAndRemoveSetting(entity.settings, "Tasks Remaining When Alert Is Sent", "Tasks Remaining When Alert Sent");
+                        addAndRemoveSetting(entity.settings, "Haunter Reveals Neutral Roles", "Reveals Neutral Roles");
+                        addAndRemoveSetting(entity.settings, "Who Can Click Haunter", "Who Can Click");
+                        break;
+                    case "Investigator":
+                        addAndRemoveSetting(entity.settings, "Footprint Size", "Footprint Size");
+                        addAndRemoveSetting(entity.settings, "Footprint Interval", "Footprint Interval");
+                        addAndRemoveSetting(entity.settings, "Footprint Duration", "Footprint Duration");
+                        addAndRemoveSetting(entity.settings, "Anonymous Footprint", "Anonymous Footprint");
+                        addAndRemoveSetting(entity.settings, "Footprint Vent Visible", "Footprint Vent Visible");
+                        break;
+                    case "Lookout":
+                        addAndRemoveSetting(entity.settings, "Watch Cooldown", "Watch Cooldown");
+                        addAndRemoveSetting(entity.settings, "Lookout Watches Reset After Each Round", "Watches Reset After Round");
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Players That Can Be Watched", "Max Players Watched");
+                        break;
+                    case "Mystic":
+                        addAndRemoveSetting(entity.settings, "Dead Body Arrow Duration", "Dead Body Arrow Duration");
+                        break;
+                    case "Seer":
+                        addAndRemoveSetting(entity.settings, "Seer Cooldown", "Seer Cooldown");
+                        addAndRemoveSetting(entity.settings, "Crewmate Killing Roles Are Red", "Crewmate Killing Red");
+                        addAndRemoveSetting(entity.settings, "Neutral Benign Roles Are Red", "Neutral Benign Red");
+                        addAndRemoveSetting(entity.settings, "Neutral Evil Roles Are Red", "Neutral Evil Red");
+                        addAndRemoveSetting(entity.settings, "Neutral Killing Roles Are Red", "Neutral Killing Red");
+                        addAndRemoveSetting(entity.settings, "Traitor Does Not Swap Colours", "Traitor No Color Swap");
+                        break;
+                    case "Snitch":
+                        addAndRemoveSetting(entity.settings, "Snitch Sees Neutral Roles", "Sees Neutral Roles");
+                        addAndRemoveSetting(entity.settings, "Tasks Remaining When Revealed", "Tasks Remaining When Revealed");
+                        addAndRemoveSetting(entity.settings, "Snitch Sees Impostors In Meetings", "Sees Impostors In Meetings");
+                        addAndRemoveSetting(entity.settings, "Snitch Sees Traitor", "Sees Traitor");
+                        break;
+                    case "Spy":
+                        addAndRemoveSetting(entity.settings, "Who Sees Dead Bodies On Admin", "Who Sees Dead Bodies On Admin");
+                        break;
+                    case "Tracker":
+                        addAndRemoveSetting(entity.settings, "Arrow Update Interval", "Arrow Update Interval");
+                        addAndRemoveSetting(entity.settings, "Track Cooldown", "Track Cooldown");
+                        addAndRemoveSetting(entity.settings, "Tracker Arrows Reset After Each Round", "Arrows Reset After Round");
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Tracks", "Max Tracks");
+                        break;
+                    case "Trapper":
+                        addAndRemoveSetting(entity.settings, "Min Amount Of Time In Trap To Register", "Min Time In Trap To Register");
+                        addAndRemoveSetting(entity.settings, "Trap Cooldown", "Trap Cooldown");
+                        addAndRemoveSetting(entity.settings, "Traps Removed After Each Round", "Traps Removed After Round");
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Traps", "Max Traps");
+                        addAndRemoveSetting(entity.settings, "Trap Size", "Trap Size");
+                        addAndRemoveSetting(entity.settings, "Minimum Number Of Roles Required To Trigger Trap", "Min Roles To Trigger Trap");
+                        break;
+                    case "Deputy":
+                        addAndRemoveSetting(entity.settings, "Jail Cooldown", "Camp Cooldown"); // Reusing Jail Cooldown for Camp
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Executes", "Max Shoots"); // Reusing Max Executes for Max Shoots
+                        break;
+                    case "Hunter":
+                        addAndRemoveSetting(entity.settings, "Hunter Kill Cooldown", "Kill Cooldown");
+                        addAndRemoveSetting(entity.settings, "Hunter Stalk Cooldown", "Stalk Cooldown");
+                        addAndRemoveSetting(entity.settings, "Hunter Stalk Duration", "Stalk Duration");
+                        addAndRemoveSetting(entity.settings, "Maximum Stalk Uses", "Max Stalk Uses");
+                        addAndRemoveSetting(entity.settings, "Hunter Kills Last Voter If Voted Out", "Kills Last Voter If Voted Out");
+                        addAndRemoveSetting(entity.settings, "Hunter Can Report Who They've Killed", "Can Report Kills");
+                        break;
+                    case "Jailor":
+                        addAndRemoveSetting(entity.settings, "Jail Cooldown", "Jail Cooldown");
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Executes", "Max Executes");
+                        break;
+                    case "Sheriff":
+                        addAndRemoveSetting(entity.settings, "Sheriff Miskill Kills Crewmate", "Miskill Kills Crewmate");
+                        addAndRemoveSetting(entity.settings, "Sheriff Kills Neutral Evil Roles", "Kills Neutral Evil Roles");
+                        addAndRemoveSetting(entity.settings, "Sheriff Kills Neutral Killing Roles", "Kills Neutral Killing Roles");
+                        addAndRemoveSetting(entity.settings, "Sheriff Kill Cooldown", "Kill Cooldown");
+                        addAndRemoveSetting(entity.settings, "Sheriff Can Report Who They've Killed", "Can Report Kills");
+                        break;
+                    case "Veteran":
+                        addAndRemoveSetting(entity.settings, "Can Be Killed On Alert", "Can Be Killed On Alert");
+                        addAndRemoveSetting(entity.settings, "Alert Cooldown", "Alert Cooldown");
+                        addAndRemoveSetting(entity.settings, "Alert Duration", "Alert Duration");
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Alerts", "Max Alerts");
+                        break;
+                    case "Vigilante":
+                        addAndRemoveSetting(entity.settings, "Number Of Vigilante Kills", "Number Of Kills");
+                        addAndRemoveSetting(entity.settings, "Vigilante Can Kill More Than Once Per Meeting", "Can Kill More Than Once Per Meeting");
+                        addAndRemoveSetting(entity.settings, "Vigilante Can Guess Neutral Benign Roles", "Can Guess Neutral Benign Roles");
+                        addAndRemoveSetting(entity.settings, "Vigilante Can Guess Neutral Evil Roles", "Can Guess Neutral Evil Roles");
+                        addAndRemoveSetting(entity.settings, "Vigilante Can Guess Neutral Killing Roles", "Can Guess Neutral Killing Roles");
+                        addAndRemoveSetting(entity.settings, "Vigilante Can Guess Impostor Modifiers", "Can Guess Impostor Modifiers");
+                        addAndRemoveSetting(entity.settings, "Vigilante Can Guess Lovers", "Can Guess Lovers");
+                        break;
+                    case "Cleric":
+                        addAndRemoveSetting(entity.settings, "Barrier Cooldown", "Barrier Cooldown");
+                        addAndRemoveSetting(entity.settings, "Show Barriered Player", "Show Barriered Player");
+                        addAndRemoveSetting(entity.settings, "Cleric Gets Attack Notification", "Gets Attack Notification");
+                        break;
+                    case "Medic":
+                        addAndRemoveSetting(entity.settings, "Show Shielded Player", "Show Shielded Player");
+                        addAndRemoveSetting(entity.settings, "Who Gets Murder Attempt Indicator", "Murder Attempt Indicator");
+                        addAndRemoveSetting(entity.settings, "Shield Breaks On Murder Attempt", "Shield Breaks On Murder Attempt");
+                        addAndRemoveSetting(entity.settings, "Show Medic Reports", "Show Medic Reports");
+                        addAndRemoveSetting(entity.settings, "Time Where Medic Will Have Color Type", "Time For Color Type");
+                        break;
+                    case "Oracle":
+                        addAndRemoveSetting(entity.settings, "Confess Cooldown", "Confess Cooldown");
+                        addAndRemoveSetting(entity.settings, "Initial Bless Cooldown", "Initial Bless Cooldown");
+                        addAndRemoveSetting(entity.settings, "Reveal Accuracy", "Reveal Accuracy");
+                        addAndRemoveSetting(entity.settings, "Neutral Benign Roles Show Evil", "Neutral Benign Show Evil");
+                        addAndRemoveSetting(entity.settings, "Neutral Evil Roles Show Evil", "Neutral Evil Show Evil");
+                        addAndRemoveSetting(entity.settings, "Neutral Killing Roles Show Evil", "Neutral Killing Show Evil");
+                        break;
+                    case "Warden":
+                        addAndRemoveSetting(entity.settings, "Show Fortified Player", "Show Fortified Player");
+                        break;
+                    case "Engineer":
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Fixes", "Max Fixes");
+                        break;
+                    case "Medium":
+                        addAndRemoveSetting(entity.settings, "Mediate Cooldown", "Mediate Cooldown");
+                        addAndRemoveSetting(entity.settings, "Reveal Appearance Of Mediate Target", "Reveal Mediate Target Appearance");
+                        addAndRemoveSetting(entity.settings, "Reveal The Medium To The Mediate Target", "Reveal Medium To Target");
+                        addAndRemoveSetting(entity.settings, "Who Is Revealed With Mediate", "Who Is Revealed With Mediate");
+                        break;
+                    case "Plumber":
+                        addAndRemoveSetting(entity.settings, "Flush Cooldown", "Flush Cooldown");
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Barricades", "Max Barricades");
+                        break;
+                    case "Politician":
+                        addAndRemoveSetting(entity.settings, "Campaign Cooldown", "Campaign Cooldown");
+                        break;
+                    case "Prosecutor":
+                        addAndRemoveSetting(entity.settings, "Prosecutor Dies When They Exile A Crewmate", "Dies When Exiles Crewmate");
+                        break;
+                    case "Swapper":
+                        addAndRemoveSetting(entity.settings, "Swapper Can Button", "Can Button");
+                        break;
+                    case "Transporter":
+                        addAndRemoveSetting(entity.settings, "Transport Cooldown", "Transport Cooldown");
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Transports", "Max Transports");
+                        addAndRemoveSetting(entity.settings, "Transporter Can Use Vitals", "Can Use Vitals");
+                        break;
+                    case "Amnesiac":
+                        addAndRemoveSetting(entity.settings, "Amnesiac Gets Arrows Pointing To Dead Bodies", "Gets Arrows To Dead Bodies");
+                        addAndRemoveSetting(entity.settings, "Time After Death Arrow Appears", "Time After Death Arrow Appears");
+                        break;
+                    case "Guardian Angel":
+                        addAndRemoveSetting(entity.settings, "Protect Cooldown", "Protect Cooldown");
+                        addAndRemoveSetting(entity.settings, "Protect Duration", "Protect Duration");
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Protects", "Max Protects");
+                        addAndRemoveSetting(entity.settings, "Show Protected Player", "Show Protected Player");
+                        addAndRemoveSetting(entity.settings, "GA Becomes On Target Dead", "Becomes On Target Dead");
+                        addAndRemoveSetting(entity.settings, "Target Knows GA Exists", "Target Knows GA Exists");
+                        addAndRemoveSetting(entity.settings, "GA Knows Targets Role", "Knows Targets Role");
+                        addAndRemoveSetting(entity.settings, "Odds Of Target Being Evil", "Odds Of Target Being Evil");
+                        break;
+                    case "Mercenary":
+                        addAndRemoveSetting(entity.settings, "Guard Cooldown", "Guard Cooldown");
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Guards", "Max Guards");
+                        addAndRemoveSetting(entity.settings, "Gold To Bribe", "Gold To Bribe");
+                        break;
+                    case "Survivor":
+                        addAndRemoveSetting(entity.settings, "Vest Cooldown", "Vest Cooldown");
+                        addAndRemoveSetting(entity.settings, "Vest Duration", "Vest Duration");
+                        addAndRemoveSetting(entity.settings, "Maximum Number Of Vests", "Max Vests");
+                        addAndRemoveSetting(entity.settings, "Survivor Scatter Mechanic Enabled", "Scatter Mechanic Enabled");
+                        addAndRemoveSetting(entity.settings, "Survivor Scatter Timer", "Scatter Timer");
+                        break;
+                    case "Doomsayer":
+                        addAndRemoveSetting(entity.settings, "Observe Cooldown", "Observe Cooldown");
+                        addAndRemoveSetting(entity.settings, "Doomsayer Guesses All Roles At Once", "Guesses All Roles At Once");
+                        addAndRemoveSetting(entity.settings, "Doomsayer Can't Observe", "Can't Observe");
+                        addAndRemoveSetting(entity.settings, "Doomsayer Win Ends Game", "Win Ends Game");
+                        break;
+                    case "Executioner":
+                        addAndRemoveSetting(entity.settings, "Executioner Becomes On Target Dead", "Becomes On Target Dead");
+                        addAndRemoveSetting(entity.settings, "Executioner Can Button", "Can Button");
+                        addAndRemoveSetting(entity.settings, "Executioner Win", "Win Condition");
+                        break;
+                    case "Jester":
+                        addAndRemoveSetting(entity.settings, "Jester Can Button", "Can Button");
+                        addAndRemoveSetting(entity.settings, "Jester Can Hide In Vents", "Can Hide In Vents");
+                        addAndRemoveSetting(entity.settings, "Jester Has Impostor Vision", "Has Impostor Vision");
+                        addAndRemoveSetting(entity.settings, "Jester Scatter Mechanic Enabled", "Scatter Mechanic Enabled");
+                        addAndRemoveSetting(entity.settings, "Jester Scatter Timer", "Scatter Timer");
+                        addAndRemoveSetting(entity.settings, "Jester Win", "Win Condition");
+                        break;
+                    case "Phantom":
+                        addAndRemoveSetting(entity.settings, "Tasks Remaining When Phantom Can Be Clicked", "Tasks Remaining When Clickable");
+                        addAndRemoveSetting(entity.settings, "Phantom Win Ends Game", "Win Ends Game");
+                        break;
+                    case "Arsonist":
+                        addAndRemoveSetting(entity.settings, "Douse Cooldown", "Douse Cooldown");
+                        addAndRemoveSetting(entity.settings, "Ignite Radius", "Ignite Radius");
+                        addAndRemoveSetting(entity.settings, "Arsonist Can Vent", "Can Vent");
+                        break;
+                    case "Glitch":
+                        addAndRemoveSetting(entity.settings, "Mimic Cooldown", "Mimic Cooldown");
+                        addAndRemoveSetting(entity.settings, "Mimic Duration", "Mimic Duration");
+                        addAndRemoveSetting(entity.settings, "Hack Cooldown", "Hack Cooldown");
+                        addAndRemoveSetting(entity.settings, "Hack Duration", "Hack Duration");
+                        addAndRemoveSetting(entity.settings, "Glitch Kill Cooldown", "Kill Cooldown");
+                        addAndRemoveSetting(entity.settings, "Glitch Can Vent", "Can Vent");
+                        break;
+                    case "Juggernaut":
+                        addAndRemoveSetting(entity.settings, "Juggernaut Initial Kill Cooldown", "Initial Kill Cooldown");
+                        addAndRemoveSetting(entity.settings, "Reduced Kill Cooldown Per Kill", "Reduced Kill Cooldown Per Kill");
+                        addAndRemoveSetting(entity.settings, "Juggernaut Can Vent", "Can Vent");
+                        break;
+                    case "Plaguebearer":
+                        addAndRemoveSetting(entity.settings, "Infect Cooldown", "Infect Cooldown");
+                        break;
+                    case "Pestilence":
+                        addAndRemoveSetting(entity.settings, "Pestilence Kill Cooldown", "Kill Cooldown");
+                        addAndRemoveSetting(entity.settings, "Pestilence Can Vent", "Can Vent");
+                        break;
+                    case "Soul Collector":
+                        addAndRemoveSetting(entity.settings, "Reap Cooldown", "Reap Cooldown");
+                        addAndRemoveSetting(entity.settings, "Soul Collector Can Vent", "Can Vent");
+                        break;
+                    case "Vampire":
+                        addAndRemoveSetting(entity.settings, "Vampire Bite Cooldown", "Bite Cooldown");
+                        addAndRemoveSetting(entity.settings, "Vampires Have Impostor Vision", "Has Impostor Vision");
+                        addAndRemoveSetting(entity.settings, "Vampires Can Vent", "Can Vent");
+                        addAndRemoveSetting(entity.settings, "New Vampire Can Assassinate", "New Vampire Can Assassinate");
+                        addAndRemoveSetting(entity.settings, "Maximum Vampires Per Game", "Max Vampires Per Game");
+                        addAndRemoveSetting(entity.settings, "Can Convert Neutral Benign Roles", "Can Convert Neutral Benign Roles");
+                        addAndRemoveSetting(entity.settings, "Can Convert Neutral Evil Roles", "Can Convert Neutral Evil Roles");
+                        break;
+                    case "Werewolf":
+                        addAndRemoveSetting(entity.settings, "Rampage Cooldown", "Rampage Cooldown");
+                        addAndRemoveSetting(entity.settings, "Rampage Duration", "Rampage Duration");
+                        addAndRemoveSetting(entity.settings, "Rampage Kill Cooldown", "Rampage Kill Cooldown");
+                        addAndRemoveSetting(entity.settings, "Werewolf Can Vent When Rampaged", "Can Vent When Rampaged");
+                        break;
+                    case "Eclipsal":
+                        addAndRemoveSetting(entity.settings, "Blind Cooldown", "Blind Cooldown");
+                        addAndRemoveSetting(entity.settings, "Blind Duration", "Blind Duration");
+                        addAndRemoveSetting(entity.settings, "Blind Radius", "Blind Radius");
+                        break;
+                    case "Escapist":
+                        addAndRemoveSetting(entity.settings, "Recall Cooldown", "Recall Cooldown");
+                        addAndRemoveSetting(entity.settings, "Escapist Can Vent", "Can Vent");
+                        break;
+                    case "Grenadier":
+                        addAndRemoveSetting(entity.settings, "Flash Grenade Cooldown", "Flash Grenade Cooldown");
+                        addAndRemoveSetting(entity.settings, "Flash Grenade Duration", "Flash Grenade Duration");
+                        addAndRemoveSetting(entity.settings, "Flash Radius", "Flash Radius");
+                        addAndRemoveSetting(entity.settings, "Grenadier Can Vent", "Can Vent");
+                        break;
+                    case "Morphling":
+                        addAndRemoveSetting(entity.settings, "Morphling Cooldown", "Morphling Cooldown");
+                        addAndRemoveSetting(entity.settings, "Morphling Duration", "Morphling Duration");
+                        addAndRemoveSetting(entity.settings, "Morphling Can Vent", "Can Vent");
+                        break;
+                    case "Swooper":
+                        addAndRemoveSetting(entity.settings, "Swoop Cooldown", "Swoop Cooldown");
+                        addAndRemoveSetting(entity.settings, "Swoop Duration", "Swoop Duration");
+                        addAndRemoveSetting(entity.settings, "Swooper Can Vent", "Can Vent");
+                        break;
+                    case "Venerer":
+                        addAndRemoveSetting(entity.settings, "Ability Cooldown", "Ability Cooldown");
+                        addAndRemoveSetting(entity.settings, "Ability Duration", "Ability Duration");
+                        addAndRemoveSetting(entity.settings, "Sprint Speed", "Sprint Speed");
+                        addAndRemoveSetting(entity.settings, "Minimum Freeze Speed", "Min Freeze Speed");
+                        addAndRemoveSetting(entity.settings, "Freeze Radius", "Freeze Radius");
+                        break;
+                    case "Bomber":
+                        addAndRemoveSetting(entity.settings, "Detonate Delay", "Detonate Delay");
+                        addAndRemoveSetting(entity.settings, "Max Kills In Detonation", "Max Kills In Detonation");
+                        addAndRemoveSetting(entity.settings, "Detonate Radius", "Detonate Radius");
+                        addAndRemoveSetting(entity.settings, "Bomber Can Vent", "Can Vent");
+                        addAndRemoveSetting(entity.settings, "All Impostors See Bomb", "All Impostors See Bomb");
+                        break;
+                    case "Scavenger":
+                        addAndRemoveSetting(entity.settings, "Scavenge Duration", "Scavenge Duration");
+                        addAndRemoveSetting(entity.settings, "Scavenge Duration Increase Per Kill", "Duration Increase Per Kill");
+                        addAndRemoveSetting(entity.settings, "Scavenge Kill Cooldown On Correct Kill", "Kill Cooldown On Correct Kill");
+                        addAndRemoveSetting(entity.settings, "Kill Cooldown Multiplier On Incorrect Kill", "Cooldown Multiplier On Incorrect Kill");
+                        break;
+                    case "Traitor":
+                        addAndRemoveSetting(entity.settings, "Minimum People Alive When Traitor Can Spawn", "Min People Alive To Spawn");
+                        addAndRemoveSetting(entity.settings, "Traitor Won't Spawn If Any Neutral Killing Is Alive", "Won't Spawn If Neutral Killing Alive");
+                        addAndRemoveSetting(entity.settings, "Traitor Gets Ability", "Gets Ability");
+                        break;
+                    case "Warlock":
+                        addAndRemoveSetting(entity.settings, "Time It Takes To Fully Charge", "Time To Fully Charge");
+                        addAndRemoveSetting(entity.settings, "Time It Takes To Use Full Charge", "Time To Use Full Charge");
+                        break;
+                    case "Blackmailer":
+                        addAndRemoveSetting(entity.settings, "Initial Blackmail Cooldown", "Initial Blackmail Cooldown");
+                        addAndRemoveSetting(entity.settings, "Only Target Sees Blackmail", "Only Target Sees Blackmail");
+                        addAndRemoveSetting(entity.settings, "Maximum People Alive Where Blackmailed Can Vote", "Max People Alive For Vote");
+                        break;
+                    case "Hypnotist":
+                        addAndRemoveSetting(entity.settings, "Hypnotize Cooldown", "Hypnotize Cooldown");
+                        break;
+                    case "Miner":
+                        addAndRemoveSetting(entity.settings, "Mine Cooldown", "Mine Cooldown");
+                        break;
+                    case "Undertaker":
+                        addAndRemoveSetting(entity.settings, "Drag Cooldown", "Drag Cooldown");
+                        addAndRemoveSetting(entity.settings, "Undertaker Drag Speed", "Drag Speed");
+                        addAndRemoveSetting(entity.settings, "Undertaker Can Vent", "Can Vent");
+                        addAndRemoveSetting(entity.settings, "Undertaker Can Vent While Dragging", "Can Vent While Dragging");
+                        break;
+                    case "Bait":
+                        addAndRemoveSetting(entity.settings, "Minimum Delay for the Bait Report", "Min Delay for Report");
+                        addAndRemoveSetting(entity.settings, "Maximum Delay for the Bait Report", "Max Delay for Report");
+                        break;
+                    case "Diseased":
+                        addAndRemoveSetting(entity.settings, "Diseased Kill Multiplier", "Kill Multiplier");
+                        break;
+                    case "Frosty":
+                        addAndRemoveSetting(entity.settings, "Chill Duration", "Chill Duration");
+                        addAndRemoveSetting(entity.settings, "Chill Start Speed", "Chill Start Speed");
+                        break;
+                    case "Flash":
+                        addAndRemoveSetting(entity.settings, "Flash Speed", "Speed Bonus");
+                        break;
+                    case "Giant":
+                        addAndRemoveSetting(entity.settings, "Giant Speed", "Speed Multiplier");
+                        break;
+                    case "Lovers":
+                        addAndRemoveSetting(entity.settings, "Both Lovers Die", "Both Lovers Die");
+                        addAndRemoveSetting(entity.settings, "Loving Impostor Probability", "Loving Impostor Probability");
+                        addAndRemoveSetting(entity.settings, "Neutral Roles Can Be Lovers", "Neutral Roles Can Be Lovers");
+                        addAndRemoveSetting(entity.settings, "Impostor Lover Can Kill Teammate", "Impostor Lover Can Kill Teammate");
+                        break;
+                    case "Radar":
+                        addAndRemoveSetting(entity.settings, "Radiate Colour Range", "Radiate Color Range");
+                        addAndRemoveSetting(entity.settings, "Radiate Max Range", "Radiate Max Range");
+                        break;
+                    case "Shy":
+                        addAndRemoveSetting(entity.settings, "Transparency Delay", "Transparency Delay");
+                        addAndRemoveSetting(entity.settings, "Turn Transparent Duration", "Turn Transparent Duration");
+                        addAndRemoveSetting(entity.settings, "Final Opacity", "Final Opacity");
+                        break;
+                    case "Saboteur":
+                        addAndRemoveSetting(entity.settings, "Reduced Sabotage Bonus", "Reduced Sabotage Bonus");
+                        break;
+                    case "Underdog":
+                        addAndRemoveSetting(entity.settings, "Kill Cooldown Bonus", "Kill Cooldown Bonus");
+                        addAndRemoveSetting(entity.settings, "Increased Kill Cooldown When 2+ Imps", "Increased Cooldown When 2+ Imps");
+                        break;
+                    case "Celebrity":
+                        addAndRemoveSetting(entity.settings, "Broadcast Duration", "Broadcast Duration");
+                        break;
+                    // No specific settings for Janitor in the provided file beyond probability
+                }
+            });
+        }
+
+        // Call the function to assign settings
+        assignSettingsToEntities();
+
+        // Now, what remains in currentParsedSettings are the truly general game settings.
+        const generalGameSettings = { ...currentParsedSettings };
+
+        // Categorize general game settings for better display
+        const categorizedGameSettings = {
+            "Role Slots & Probability": [],
+            "Map Settings": [],
+            "Task Settings": [],
+            "General Game Mechanics": [],
+            "Assassin Settings": [],
+            "Vision & Information": [],
+            "Interaction & Movement": [],
+            "Other General Settings": []
+        };
+
+        // Manually assign settings to categories (based on common sense and typical game settings)
+        for (const key in generalGameSettings) {
+            const value = generalGameSettings[key];
+            if (key.startsWith("Slot") || key === "All Roles Are Unique") {
+                categorizedGameSettings["Role Slots & Probability"].push({ name: key, value: value });
+            } else if (key.includes("Map") || key.includes("Chance") || key.includes("Layout") || key.includes("Moved") || key.includes("Swapped") || key.includes("Doors")) {
+                categorizedGameSettings["Map Settings"].push({ name: key, value: value });
+            } else if (key.includes("Task")) {
+                categorizedGameSettings["Task Settings"].push({ name: key, value: value });
+            } else if (key.includes("Assassin")) {
+                categorizedGameSettings["Assassin Settings"].push({ name: key, value: value });
+            } else if (key.includes("Vision") || key.includes("See") || key.includes("Dead Can See") || key.includes("Comms")) {
+                categorizedGameSettings["Vision & Information"].push({ name: key, value: value });
+            } else if (key.includes("Cooldown") || key.includes("Speed") || key.includes("Delay") || key.includes("Radius") || key.includes("Duration") || key.includes("Freeze") || key.includes("Vent") || key.includes("Drag")) {
+                categorizedGameSettings["Interaction & Movement"].push({ name: key, value: value });
+            }
+            else {
+                categorizedGameSettings["Other General Settings"].push({ name: key, value: value });
+            }
+        }
+
+        // Sort settings within each category alphabetically by name
+        for (const category in categorizedGameSettings) {
+            categorizedGameSettings[category].sort((a, b) => a.name.localeCompare(b.name));
+        }
+
+
+        function createCard(entity) {
+            const card = document.createElement('div');
+            card.className = `base-card ${entity.category === 'Role' ? 'role-card' : 'modifier-card'}`;
+
+            // Add click listener to open the modal
+            card.addEventListener('click', () => openModal(entity));
+
+            // Determine the unique color for this entity
+            const uniqueColor = entity.category === 'Role' ? roleColors[entity.name] : modifierColors[entity.name];
+
+            // Determine team info (for dot color and text)
+            let teamInfo;
+            if (entity.category === 'Role') {
+                teamInfo = teamColors[entity.team];
+            } else {
+                teamInfo = modifierTeamColors[entity.team];
+            }
+
+            // Header section (icon, name, team)
+            const header = document.createElement('div');
+            header.className = 'card-header';
+            card.appendChild(header);
+
+            const iconWrapper = document.createElement('div');
+            iconWrapper.className = entity.category === 'Role' ? 'role-icon-wrapper' : 'modifier-icon-wrapper';
+            header.appendChild(iconWrapper);
+
+            // Create the <img> element for the icon
+            const entityIconImage = document.createElement('img');
+            entityIconImage.className = entity.category === 'Role' ? 'role-icon' : 'modifier-icon';
+            entityIconImage.alt = `${entity.name} Icon`;
+            
+            let iconPath;
+            if (entity.icon.startsWith('uploaded:') || entity.icon.startsWith('http')) {
+                iconPath = entity.icon;
+            } else {
+                // For local filenames, prepend the 'Role logos/' folder path
+                iconPath = `Role logos/${entity.icon}`;
+            }
+            entityIconImage.src = iconPath;
+            iconWrapper.appendChild(entityIconImage);
+
+
+            const titleGroup = document.createElement('div');
+            titleGroup.className = 'card-title-group';
+            header.appendChild(titleGroup);
+
+            const name = document.createElement('h3');
+            name.className = 'card-name';
+            name.textContent = entity.name;
+            name.style.color = uniqueColor;
+            titleGroup.appendChild(name);
+
+            const team = document.createElement('p');
+            team.className = 'card-team';
+            team.style.color = teamInfo.dotColor;
+            titleGroup.appendChild(team);
+
+            const teamDot = document.createElement('span');
+            teamDot.className = 'team-dot';
+            teamDot.style.backgroundColor = teamInfo.dotColor;
+            team.appendChild(teamDot);
+            team.appendChild(document.createTextNode(entity.team));
+
+
+            // Description
+            const description = document.createElement('p');
+            description.className = 'card-description';
+            description.textContent = entity.desc;
+            card.appendChild(description);
+
+            // Abilities
+            const abilities = document.createElement('div');
+            abilities.className = 'card-abilities';
+            card.appendChild(abilities);
+
+            const abilitiesTitle = document.createElement('h4');
+            abilitiesTitle.textContent = 'Ability';
+            abilities.appendChild(abilitiesTitle);
+
+            const abilityItem = document.createElement('div');
+            abilityItem.className = 'ability-item';
+            abilities.appendChild(abilityItem);
+
+            const abilityIcon = document.createElement('img');
+            abilityIcon.className = 'ability-icon';
+            abilityIcon.src = entity.skillIcon;
+            abilityIcon.alt = `${entity.ability} Icon`;
+            abilityItem.appendChild(abilityIcon);
+
+            const abilityName = document.createElement('span');
+            abilityName.textContent = entity.ability;
+            abilityItem.appendChild(abilityName);
+
+
+            // Settings (if any)
+            if (entity.settings && entity.settings.length > 0) {
+                const settings = document.createElement('div');
+                settings.className = 'card-settings';
+                card.appendChild(settings);
+
+                const settingsTitle = document.createElement('h4');
+                settingsTitle.textContent = 'Settings';
+                settingsTitle.style.color = '#FFD700'; // Gold color for settings title
+                settings.appendChild(settingsTitle);
+
+                // Sort settings alphabetically by name for consistent display
+                entity.settings.sort((a, b) => a.name.localeCompare(b.name));
+
+                entity.settings.forEach(setting => {
+                    const settingItem = document.createElement('p');
+                    settingItem.className = 'setting-item';
+                    settingItem.textContent = `${setting.name}: ${setting.value}`;
+                    settings.appendChild(settingItem);
+                });
+            }
+
+            return card;
+        }
+
+        // Modal Elements
+        const detailModalOverlay = document.getElementById('detail-modal-overlay');
+        const modalCloseButton = document.getElementById('modal-close-button');
+        const modalIconWrapper = document.getElementById('modal-icon-wrapper');
+        const modalIcon = document.getElementById('modal-icon');
+        const modalName = document.getElementById('modal-name');
+        const modalTeam = document.getElementById('modal-team');
+        const modalDescription = document.getElementById('modal-description');
+        const modalAbilityIcon = document.getElementById('modal-ability-icon');
+        const modalAbilityName = document.getElementById('modal-ability-name');
+        const modalSettingsSection = document.getElementById('modal-settings-section');
+        const modalSettingsList = document.getElementById('modal-settings-list');
+
+        function openModal(entity) {
+            // Determine the unique color for this entity
+            const uniqueColor = entity.category === 'Role' ? roleColors[entity.name] : modifierColors[entity.name];
+
+            // Set modal content
+            modalName.textContent = entity.name;
+            modalName.style.color = uniqueColor; // Apply unique color to modal name
+
+            // Determine team info for modal (for dot color and text)
+            let teamInfo;
+            if (entity.category === 'Role') {
+                teamInfo = teamColors[entity.team];
+            } else {
+                teamInfo = modifierTeamColors[entity.team];
+            }
+            modalTeam.innerHTML = `<span class="team-dot" style="background-color: ${teamInfo.dotColor};"></span>${entity.team}`;
+            modalTeam.style.color = teamInfo.dotColor; // Apply team color to modal team
+
+            modalDescription.textContent = entity.desc;
+            
+            // Set icon and its shape
+            let iconPath;
+            if (entity.icon.startsWith('uploaded:') || entity.icon.startsWith('http')) {
+                iconPath = entity.icon;
+            } else {
+                iconPath = `Role logos/${entity.icon}`;
+            }
+            modalIcon.src = iconPath;
+
+            // Apply correct classes for icon shape and zoom
+            modalIconWrapper.classList.toggle('square', entity.category === 'Modifier');
+            modalIcon.classList.toggle('square', entity.category === 'Modifier');
+
+
+            modalAbilityIcon.src = entity.skillIcon;
+            modalAbilityName.textContent = entity.ability;
+
+            // Populate settings if available
+            if (entity.settings && entity.settings.length > 0) {
+                modalSettingsSection.style.display = 'block';
+                modalSettingsList.innerHTML = ''; // Clear previous settings
+
+                // Sort settings alphabetically by name for consistent display in modal
+                entity.settings.sort((a, b) => a.name.localeCompare(b.name));
+
+                entity.settings.forEach(setting => {
+                    const settingItem = document.createElement('p');
+                    settingItem.className = 'modal-setting-item';
+                    settingItem.textContent = `${setting.name}: ${setting.value}`;
+                    modalSettingsList.appendChild(settingItem);
+                });
+            } else {
+                modalSettingsSection.style.display = 'none';
+            }
+
+            detailModalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
+        }
+
+        function closeModal() {
+            detailModalOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Event Listeners for modal close
+        modalCloseButton.addEventListener('click', closeModal);
+        detailModalOverlay.addEventListener('click', (event) => {
+            // Close if clicking on the overlay itself, not the content
+            if (event.target === detailModalOverlay) {
+                closeModal();
+            }
+        });
+
+
+        function renderCards() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase();
+            const selectedFilter = document.getElementById('combined-filter-select').value;
+
+            console.log("--- Rendering Cards ---");
+            console.log("Search Term:", searchTerm);
+            console.log("Selected Filter:", selectedFilter);
+
+            const filteredEntities = allEntitiesData.filter(entity => {
+                const matchesSearch = entity.name.toLowerCase().includes(searchTerm) ||
+                                      entity.desc.toLowerCase().includes(searchTerm) ||
+                                      entity.ability.toLowerCase().includes(searchTerm);
+
+                let matchesFilter = true; // Assume true if "All" is selected
+
+                if (selectedFilter !== "All") {
+                    // Check if the selected filter is a 'category' (Role/Modifier types)
+                    if (["Crewmate", "Neutral", "Impostor", "Crewmate Modifier", "Global Modifier", "Impostor Modifier"].includes(selectedFilter)) {
+                        matchesFilter = entity.team === selectedFilter;
+                    } else {
+                        // Otherwise, it's a 'type' (Kill, Support, etc.)
+                        matchesFilter = entity.types.includes(selectedFilter);
+                    }
+                }
+
+                console.log(`Entity: ${entity.name}, Team: ${entity.team}, Types: ${entity.types.join(', ')}`);
+                console.log(`  Matches Search: ${matchesSearch}, Matches Filter: ${matchesFilter}`);
+                console.log(`  Overall Match: ${matchesSearch && matchesFilter}`);
+
+                return matchesSearch && matchesFilter;
+            });
+
+            const cardGrid = document.getElementById('card-grid');
+            cardGrid.innerHTML = '';
+            if (filteredEntities.length === 0) {
+                cardGrid.innerHTML = '<p class="col-span-full text-center text-lg text-gray-400">No roles or modifiers found matching your criteria.</p>';
+            } else {
+                filteredEntities.forEach(entity => {
+                    cardGrid.appendChild(createCard(entity));
+                });
+            }
+        }
+
+        // Function to render general game settings
+        function renderGameSettings() {
+            const gameSettingsContainer = document.getElementById('game-settings-container');
+            gameSettingsContainer.innerHTML = ''; // Clear previous settings
+
+            for (const categoryTitle in categorizedGameSettings) {
+                const settingsInCategory = categorizedGameSettings[categoryTitle];
+
+                if (settingsInCategory.length > 0) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'settings-category';
+
+                    const title = document.createElement('h3');
+                    title.className = 'settings-category-title';
+                    title.textContent = categoryTitle;
+                    categoryDiv.appendChild(title);
+
+                    const settingsList = document.createElement('div');
+                    settingsList.className = 'settings-list';
+                    categoryDiv.appendChild(settingsList);
+
+                    settingsInCategory.forEach(setting => {
+                        const listItem = document.createElement('div');
+                        listItem.className = 'settings-list-item';
+
+                        const settingName = document.createElement('span');
+                        settingName.textContent = setting.name;
+                        listItem.appendChild(settingName);
+
+                        const settingValue = document.createElement('span');
+                        settingValue.textContent = setting.value;
+                        listItem.appendChild(settingValue);
+
+                        settingsList.appendChild(listItem);
+                    });
+
+                    gameSettingsContainer.appendChild(categoryDiv);
+                }
+            }
+        }
+
+        // Tab Switching Logic
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.dataset.tab;
+
+                // Deactivate all tabs and hide all content
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // Activate clicked tab and show its content
+                button.classList.add('active');
+                document.getElementById(`${targetTab}-tab`).classList.add('active');
+
+                // Re-render content if it's the game settings tab
+                if (targetTab === 'game-settings') {
+                    renderGameSettings();
+                } else {
+                    renderCards(); // Re-render roles/modifiers if switching back
+                }
+            });
+        });
+
+
+        // Initial render
+        document.addEventListener('DOMContentLoaded', () => {
+            renderCards(); // Render roles/modifiers by default on load
+            // The game settings will be rendered only when the tab is clicked
+        });
+    </script>
+</body>
+
+</html>
